@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document id="root_doc">
+<Schema name="assessment_hf" id="assessment_hf">
+	<SimpleField name="id" type="int"></SimpleField>
+	<SimpleField name="source" type="string"></SimpleField>
+	<SimpleField name="Triage" type="string"></SimpleField>
+	<SimpleField name="IPC" type="string"></SimpleField>
+	<SimpleField name="covered" type="string"></SimpleField>
+	<SimpleField name="status" type="string"></SimpleField>
+	<SimpleField name="Type" type="string"></SimpleField>
+	<SimpleField name="Location" type="string"></SimpleField>
+	<SimpleField name="Zone" type="string"></SimpleField>
+	<SimpleField name="contact" type="string"></SimpleField>
+	<SimpleField name="contact_nb" type="string"></SimpleField>
+	<SimpleField name="Partners" type="string"></SimpleField>
+	<SimpleField name="Partner_Ty" type="string"></SimpleField>
+	<SimpleField name="last_train" type="string"></SimpleField>
+</Schema>
+<Folder><name>assessment_hf</name>
+  <Placemark>
+	<name>Rev. Father James Lee Memorial Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#assessment_hf">
+		<SimpleData name="id">281</SimpleData>
+		<SimpleData name="source">MOH</SimpleData>
+		<SimpleData name="Triage">yes</SimpleData>
+		<SimpleData name="IPC">no</SimpleData>
+		<SimpleData name="covered">no</SimpleData>
+		<SimpleData name="status">Private</SimpleData>
+		<SimpleData name="Type">Clinic</SimpleData>
+		<SimpleData name="Location">Caldwell</SimpleData>
+		<SimpleData name="Zone">Caldwell</SimpleData>
+		<SimpleData name="contact_nb">777059286</SimpleData>
+		<SimpleData name="Partners">MTI</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Point><coordinates>-10.756600000242733,6.391100000450804</coordinates></Point></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Bushrod Island Community  Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#assessment_hf">
+		<SimpleData name="id">284</SimpleData>
+		<SimpleData name="source">MOH</SimpleData>
+		<SimpleData name="Triage">yes</SimpleData>
+		<SimpleData name="IPC">Yes</SimpleData>
+		<SimpleData name="covered">yes</SimpleData>
+		<SimpleData name="status">Private</SimpleData>
+		<SimpleData name="Type">Clinic</SimpleData>
+		<SimpleData name="Location">Jamaica Road</SimpleData>
+		<SimpleData name="Zone">Logan Town</SimpleData>
+		<SimpleData name="contact">Morrison Tamba (OIC)</SimpleData>
+		<SimpleData name="contact_nb">886547398</SimpleData>
+		<SimpleData name="Partners">Mentor</SimpleData>
+		<SimpleData name="last_train">Trained Nov 20, 2014</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Point><coordinates>-10.785699999623143,6.344599999580582</coordinates></Point></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>A.F. Rusell Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#assessment_hf">
+		<SimpleData name="id">291</SimpleData>
+		<SimpleData name="source">MOH</SimpleData>
+		<SimpleData name="Triage">Yes</SimpleData>
+		<SimpleData name="IPC">no</SimpleData>
+		<SimpleData name="covered">yes</SimpleData>
+		<SimpleData name="status">Public</SimpleData>
+		<SimpleData name="Type">Clinic</SimpleData>
+		<SimpleData name="Location">ClayAshland</SimpleData>
+		<SimpleData name="Zone">St. Paul River</SimpleData>
+		<SimpleData name="contact">Rita Gartei (OIC)</SimpleData>
+		<SimpleData name="contact_nb">886525480</SimpleData>
+		<SimpleData name="Partners">SCI/MTI</SimpleData>
+		<SimpleData name="last_train">Trained November 19&amp;21, 2014 (Still improving per MTI)</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Point><coordinates>-10.726531706102776,6.423531725164465</coordinates></Point></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>RCD Marshall Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#assessment_hf">
+		<SimpleData name="id">309</SimpleData>
+		<SimpleData name="source">MOH</SimpleData>
+		<SimpleData name="Triage">yes</SimpleData>
+		<SimpleData name="IPC">no</SimpleData>
+		<SimpleData name="covered">yes</SimpleData>
+		<SimpleData name="status">Public</SimpleData>
+		<SimpleData name="Type">Clinic</SimpleData>
+		<SimpleData name="Location">Virginia</SimpleData>
+		<SimpleData name="Zone">St. Paul River</SimpleData>
+		<SimpleData name="contact">Charisa Wesseh (OIC)</SimpleData>
+		<SimpleData name="contact_nb">886529510</SimpleData>
+		<SimpleData name="Partners">SCI/MTI</SimpleData>
+		<SimpleData name="last_train">Trained November 19&amp;21, 2014, Still improving per MTI</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Point><coordinates>-10.77829999986032,6.413099999855763</coordinates></Point></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Wonjah Smith Memorial Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#assessment_hf">
+		<SimpleData name="id">317</SimpleData>
+		<SimpleData name="source">MOH</SimpleData>
+		<SimpleData name="Triage">yes</SimpleData>
+		<SimpleData name="IPC">Yes</SimpleData>
+		<SimpleData name="covered">no</SimpleData>
+		<SimpleData name="status">Private</SimpleData>
+		<SimpleData name="Type">Clinic</SimpleData>
+		<SimpleData name="Location">Logan Town</SimpleData>
+		<SimpleData name="Zone">Logan Town</SimpleData>
+		<SimpleData name="contact_nb">777059286</SimpleData>
+		<SimpleData name="Partners">mentor</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Point><coordinates>-10.784200000435998,6.352300000043496</coordinates></Point></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Banjor Community Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#assessment_hf">
+		<SimpleData name="id">329</SimpleData>
+		<SimpleData name="source">MOH</SimpleData>
+		<SimpleData name="Triage">yes</SimpleData>
+		<SimpleData name="IPC">no</SimpleData>
+		<SimpleData name="covered">yes</SimpleData>
+		<SimpleData name="status">Public</SimpleData>
+		<SimpleData name="Type">Clinic</SimpleData>
+		<SimpleData name="Location">Banjor</SimpleData>
+		<SimpleData name="Zone">St. Paul River</SimpleData>
+		<SimpleData name="contact">Claressa T.S. Howard (OIC)</SimpleData>
+		<SimpleData name="contact_nb">886536564</SimpleData>
+		<SimpleData name="Partners">MTI/Jhpiego</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Point><coordinates>-10.814899999680566,6.438199999875836</coordinates></Point></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Blamacee Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#assessment_hf">
+		<SimpleData name="id">328</SimpleData>
+		<SimpleData name="source">MOH</SimpleData>
+		<SimpleData name="Triage">no</SimpleData>
+		<SimpleData name="IPC">no</SimpleData>
+		<SimpleData name="covered">yes</SimpleData>
+		<SimpleData name="status">Public</SimpleData>
+		<SimpleData name="Type">Clinic</SimpleData>
+		<SimpleData name="Location">Brewerville</SimpleData>
+		<SimpleData name="Zone">St. Paul River</SimpleData>
+		<SimpleData name="contact">Leoca Ciaphia (OIC)</SimpleData>
+		<SimpleData name="contact_nb">886769726</SimpleData>
+		<SimpleData name="Partners">AHA</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Point><coordinates>-10.796900000408215,6.410600000297178</coordinates></Point></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Star of the sea Health center</name>
+	<ExtendedData><SchemaData schemaUrl="#assessment_hf">
+		<SimpleData name="id">359</SimpleData>
+		<SimpleData name="source">MOH</SimpleData>
+		<SimpleData name="Triage">no</SimpleData>
+		<SimpleData name="IPC">no</SimpleData>
+		<SimpleData name="covered">yes</SimpleData>
+		<SimpleData name="status">Private</SimpleData>
+		<SimpleData name="Type">Health Center</SimpleData>
+		<SimpleData name="Location">West Point</SimpleData>
+		<SimpleData name="Zone">West Point</SimpleData>
+		<SimpleData name="contact">Dr. Dorine</SimpleData>
+		<SimpleData name="contact_nb">0886551977/886375553</SimpleData>
+		<SimpleData name="Partners">Catholic Church</SimpleData>
+		<SimpleData name="last_train">Trained by an organization at unknown date</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Point><coordinates>-10.804299999579685,6.328500000041841</coordinates></Point></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Clara Town Health Center</name>
+	<ExtendedData><SchemaData schemaUrl="#assessment_hf">
+		<SimpleData name="id">377</SimpleData>
+		<SimpleData name="source">MOH</SimpleData>
+		<SimpleData name="Triage">no</SimpleData>
+		<SimpleData name="IPC">no</SimpleData>
+		<SimpleData name="covered">yes</SimpleData>
+		<SimpleData name="status">Public</SimpleData>
+		<SimpleData name="Type">Health Center</SimpleData>
+		<SimpleData name="Location">Clara Town</SimpleData>
+		<SimpleData name="Zone">Clara Town</SimpleData>
+		<SimpleData name="contact">Beatrice Kromak (OIC)</SimpleData>
+		<SimpleData name="contact_nb">8865335289</SimpleData>
+		<SimpleData name="Partners">MDM</SimpleData>
+		<SimpleData name="last_train">Trained Nov 25-26, 2014</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Point><coordinates>-10.798100000187898,6.328699999728951</coordinates></Point></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Arthington Community Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#assessment_hf">
+		<SimpleData name="id">385</SimpleData>
+		<SimpleData name="source">MOH</SimpleData>
+		<SimpleData name="Triage">yes</SimpleData>
+		<SimpleData name="IPC">no</SimpleData>
+		<SimpleData name="covered">yes</SimpleData>
+		<SimpleData name="status">Public</SimpleData>
+		<SimpleData name="Type">Clinic</SimpleData>
+		<SimpleData name="Location">Arthington</SimpleData>
+		<SimpleData name="Zone">St. Paul River</SimpleData>
+		<SimpleData name="contact">Comfort Vargbelee (OIC)</SimpleData>
+		<SimpleData name="contact_nb">886834048</SimpleData>
+		<SimpleData name="Partners">AHA/MTI/concern</SimpleData>
+		<SimpleData name="last_train">Still Improving</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Point><coordinates>-10.765700000228589,6.507199999968852</coordinates></Point></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Cynthia Nelson Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#assessment_hf">
+		<SimpleData name="id">534</SimpleData>
+		<SimpleData name="source">MSF</SimpleData>
+		<SimpleData name="Triage">yes</SimpleData>
+		<SimpleData name="IPC">Yes</SimpleData>
+		<SimpleData name="covered">no</SimpleData>
+		<SimpleData name="status">Private</SimpleData>
+		<SimpleData name="Type">Clinic</SimpleData>
+		<SimpleData name="Location">Logan Town</SimpleData>
+		<SimpleData name="Zone">Logan Town</SimpleData>
+		<SimpleData name="contact_nb">777059286</SimpleData>
+		<SimpleData name="Partners">Mentor</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Point><coordinates>-10.777737000331999,6.365842000384605</coordinates></Point></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Soninwen Health Center</name>
+	<ExtendedData><SchemaData schemaUrl="#assessment_hf">
+		<SimpleData name="id">1584</SimpleData>
+		<SimpleData name="source">MSF</SimpleData>
+		<SimpleData name="Triage">no</SimpleData>
+		<SimpleData name="IPC">no</SimpleData>
+		<SimpleData name="covered">yes</SimpleData>
+		<SimpleData name="status">Public</SimpleData>
+		<SimpleData name="Type">Health Center</SimpleData>
+		<SimpleData name="Location">Johnson Street</SimpleData>
+		<SimpleData name="Zone">Central Monrovia A</SimpleData>
+		<SimpleData name="contact">Irene Shurman (OIC)</SimpleData>
+		<SimpleData name="contact_nb">0777380347/0886490523</SimpleData>
+		<SimpleData name="Partners">MDM</SimpleData>
+		<SimpleData name="last_train">Trained Nov 25-26, 2014</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Point><coordinates>-10.802340000121648,6.308936000160373</coordinates></Point></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>T.K.G Medical and Laboratory  Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#assessment_hf">
+		<SimpleData name="id">1</SimpleData>
+		<SimpleData name="source">MSF</SimpleData>
+		<SimpleData name="Triage">yes</SimpleData>
+		<SimpleData name="IPC">Yes</SimpleData>
+		<SimpleData name="covered">no</SimpleData>
+		<SimpleData name="status">Private</SimpleData>
+		<SimpleData name="Type">Clinic</SimpleData>
+		<SimpleData name="Location">Doe Community</SimpleData>
+		<SimpleData name="Zone">Clara Town</SimpleData>
+		<SimpleData name="contact_nb">777059286</SimpleData>
+		<SimpleData name="Partners">Mentor</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Point><coordinates>-10.786669999993975,6.336575999999862</coordinates></Point></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Barclay Medical Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#assessment_hf">
+		<SimpleData name="id">2</SimpleData>
+		<SimpleData name="source">MSF</SimpleData>
+		<SimpleData name="Triage">no</SimpleData>
+		<SimpleData name="IPC">Yes</SimpleData>
+		<SimpleData name="covered">no</SimpleData>
+		<SimpleData name="status">Private</SimpleData>
+		<SimpleData name="Type">Clinic</SimpleData>
+		<SimpleData name="Location">Doe Community</SimpleData>
+		<SimpleData name="Zone">Clara Town</SimpleData>
+		<SimpleData name="contact_nb">886525658</SimpleData>
+		<SimpleData name="Partners">JSI</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Point><coordinates>-10.787095999993968,6.335785999999862</coordinates></Point></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Markue Medical laboratory Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#assessment_hf">
+		<SimpleData name="id">3</SimpleData>
+		<SimpleData name="source">MSF</SimpleData>
+		<SimpleData name="Triage">yes</SimpleData>
+		<SimpleData name="IPC">Yes</SimpleData>
+		<SimpleData name="covered">no</SimpleData>
+		<SimpleData name="status">Private</SimpleData>
+		<SimpleData name="Type">Clinic</SimpleData>
+		<SimpleData name="Location">Logan Town</SimpleData>
+		<SimpleData name="Zone">Logan Town</SimpleData>
+		<SimpleData name="contact_nb">777059286</SimpleData>
+		<SimpleData name="Partners">mentor</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Point><coordinates>-10.784815999994011,6.354459999999863</coordinates></Point></MultiGeometry>
+  </Placemark>
+</Folder>
+</Document></kml>
