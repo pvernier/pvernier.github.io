@@ -21,6 +21,7 @@ button.bswitch {
     position:relative;
     bottom:40px;
     right: 32px;
+    padding: 0 0;
 }
 
 button.bzoom {
@@ -28,6 +29,7 @@ button.bzoom {
     height: 30px;
     position:relative;
     bottom: 80px;
+    padding: 0 0;
     
 }
 
