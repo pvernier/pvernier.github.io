@@ -8,6 +8,10 @@ a.navbar-brand{
 .navbar-brand > img {
     display: inline;
 }
+a#nouv {
+    color: white;
+    text-shadow: orange 0.1em 0.1em 0.2em
+}
 .epi_content {
   padding: 40px 15px;
   text-align: center;
@@ -52,7 +56,7 @@ th[data-sort]{
     text-align: center;
 }
 /* Menu déroulant */
-select.form-control {
+select.choix_temp {
     width:80%;
     height: 30px;
     font-size : 11px;
@@ -224,7 +228,7 @@ button.bprint_na {
 
 /* End specific for niveau d'alerte map*/
 
-/* Start specific for niveau d'alerteCTE*/
+/* Start specific CTE*/
 div.cte {
     padding: 6px 8px;
     font: 14px/16px Arial, Helvetica, sans-serif;
@@ -299,7 +303,16 @@ div.alert {
    width:75%; 
    margin: 0 auto;
 }
-/* End specific for niveau d'alerteCTE*/
+div.alert-warning {
+    display: none;
+    margin: 0 auto;  
+    width:60%;
+}
+div#button {
+    width:18%; 
+    margin: 0 auto;    
+}
+/* End specific for CTE*/
 
 /* Start specific for epi week*/
 div#chart {

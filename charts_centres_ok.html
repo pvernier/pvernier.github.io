@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Daily report (data, maps and graphs) of the Ebola outbreak in Guinea, Rapport journalier (données, cartes, graphes) de l'épidémie Ebola en Guinée, 2014, 2015, VHF">
+    <meta name="author" content="WHO, OMS">
+    <title>Guinea - EBOV</title>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-61269519-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+    <!-- Bootstrap core CSS -->
+    <link href="code/src/bootstrap-3.3.4-dist/css/bootstrap.min.css" rel="stylesheet">
+    
+<link href="code/src/nvd3-master/nv.d3.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="code/css/style.css"/>
+    <script src="code/src/jquery-2.1.1.min.js"></script>
+    
+<link rel="stylesheet" href="code/css/style.css"/>
+<script src="code/src/jquery-2.1.1.min.js"></script>
+<script src="code/src/nvd3-master/lib/d3.v3.js"></script>
+<script src="code/src/nvd3-master/nv.d3.min.js"></script>
+
+
+     
+    
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="index.html"><img src="code/img/who_logo.svg" width="150px" height="50px">&nbsp;Guinea - EBOV</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <!-- <li class="active"><a href="#">Home</a></li> -->
+            <li><a href="niveau_alerte.html">Niveau d'alerte</a></li>
+            <li><a href="reticences.html">Réticences</a></li>
+            <li><a href="centres.html">Centres</a></li>
+            <li><a href="epi_weeks.html">Epi weeks</a></li>
+            <li><a href="liens_utiles.html">Liens utiles</a></li>
+            <li><a id="nouv" href="nouveautes.html">Nouveautés</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+    <div class="epi_content">
+        
+    <div class="btn-group">
+      <button type="button" id="centres" class="btn btn-default">Centres</button>
+      <button type="button" id="patients" class="btn btn-default">Patients</button>
+    </div>
+    <br>
+    <br>
+    <div id='button'></div>
+    <br>
+    <div class="alert alert-warning" role="alert"></div>
+
+
+        <div id='chart'>
+           <!-- <h3></h3> -->
+            <svg class="chart_periode"></svg>
+        </div>
+    <script type="text/javascript">
+      $(".btn-default").click(function() {
+        if ($(this).attr('id') === 'centres') {
+          $( "div#button" ).html('<select class="form-control choix_var"><option value="" disabled selected style="display:none;">Choisir un centre</option><option value="kerouane_cdt">CDT Kerouane</option><option value="siguiri_cdt">CDT Siguiri</option><option value="conakry_cte">CTE Conakry</option><option value="coyah_cte">CTE Coyah</option><option value="forecariah_cte">CTE Forecariah</option><option value="gueckedou_cte">CTE Gueckedou</option><option value="kindia_cte">CTE Kindia</option><option value="macenta_cte">CTE Macenta</option><option value="n’zerekore_cte">CTE N’Zerekore</option><option value="conakry_cts">CTS Conakry</option><option value="total_conf">Tous les centres</option></select>')
+        }
+        else{
+          $( "div#button" ).html('<select class=" form-control choix_var"><option value="" disabled selected style="display:none;">Choisir un statut de patient</option><option value="conf">Confirmés</option><option value="susp">Suspects</option><option value="guer">Sortis guéris</option><option value="mort">Décédés</option><option value="tot">Total hospitalisés</option></select>')
+        };
+        $( "div.alert-warning" ).hide("slow");
+        $( "svg.chart_periode" ).empty();
+        
+        type = $(this).attr('id');
+        
+        $("select").change(function () {
+
+        var val=this.value;
+        centre = $(this).val();
+        if (type === 'centres') {
+          if (centre === "forecariah_cte") {
+            $("div.alert-warning" ).text("Le CTE de Forecariah était un centre de transit (CDT) jusqu'au 08/04/2015");
+            $("div.alert-warning" ).show("slow");
+          }
+          else if (centre === "gueckedou_cte") {
+            $("div.alert-warning").text("Le CTE de Guéckédou a fermé le 06/04/2015");
+            $("div.alert-warning" ).show("slow");
+          }
+          else if (centre === "total_conf") {
+            $("div.alert-warning").html("Le CTE de Guéckédou a fermé le 06/04/2015<br>Le CTE de Forecariah était un centre de transit (CDT) jusqu'au 08/04/2015");
+            $("div.alert-warning" ).show("slow");
+          }
+          else {
+            $("div.alert-warning").hide("slow");
+          };
+        }
+        if (type === 'patients') {
+          $("div.alert-warning").html("Le CTE de Guéckédou a fermé le 06/04/2015<br>Le CTE de Forecariah était un centre de transit (CDT) jusqu'au 08/04/2015");
+          $("div.alert-warning" ).show();
+        };
+        /*$('h3').html('Situation dans le centre de ' + centre); */
+
+        d3.json('chart_' + centre + '.json', function(data) {
+        nv.addGraph(function() {
+        var chart_contrats = nv.models.stackedAreaChart()
+                      .margin({right: 100})
+                      //We can modify the data accessor functions...
+                      .x(function(d) { return d[0] })   
+                      //...in case your data is formatted differently.
+                      .y(function(d) { return d[1] })   
+                      //Tooltips which show all data points. Very nice!
+                      .useInteractiveGuideline(true)    
+                      //Allow user to choose 'Stacked', 'Stream', 'Expanded' mode.
+                      .showControls(true)       
+                      .clipEdge(true);
+
+        //Format x-axis labels with custom function.
+        chart_contrats.xAxis
+            .ticks(d3.time.periode, 1)
+            .tickFormat(function(d) { 
+              return d3.time.format('%d/%m/%y')(new Date(d));
+        });
+
+        chart_contrats.yAxis
+            .tickFormat(d3.format('d'))
+
+        d3.select('#chart svg')
+          .datum(data)
+          .transition().duration(500)
+          .call(chart_contrats);
+
+      //Update the chart when window resizes.
+      nv.utils.windowResize(function() { chart_contrats.update() });
+      return chart_contrats;
+
+                });      
+            });
+        });
+});
+    </script>
+
+</div>
+
+    </div>
+      
+    <script src="code/src/bootstrap-3.3.4-dist/js/bootstrap.min.js"></script>
+    
+
+     
+    
+  </body>
+</html>
