@@ -34,7 +34,6 @@
     <script src='code/src/jput-2.js'>></script>
     <script src='code/src/stupidtable.min.js'>></script>
     <script src='code/src/table2CSV.js'>></script>
-    <script src='code/src/bowser.min.js'></script>
     <script src='code/data/layers/sous_pref.geojson'></script>
     <script src='code/data/layers/countries.geojson'></script>
     <script src='code/data/layers/prefectures.geojson'></script>
@@ -127,6 +126,8 @@
         var cases;
         var semaine_map;
         var jour_map;
+        var multplicateur = 1.7;
+        var scaleFactor = 11;
          var map = L.map('map', { 
                 center: [10, -11.3441], 
                 zoom: 7,    
@@ -244,9 +245,8 @@
                                "<b>" + String(feature.properties.total) +
                                "</b> cas";
                 // Calculations for radius in function of field 'total'
-                var scaleFactor = 12,
                 area = feature.properties.total * scaleFactor;
-                radius =  Math.sqrt(area/Math.PI)*2
+                radius =  Math.sqrt(area/Math.PI) * multplicateur
                 layer.setRadius(radius);
                 layer.bindPopup(popupContent, { offset: new L.Point(0,-radius) }); 
                 layer.on({
@@ -262,10 +262,9 @@
             },
             pointToLayer: function(feature, latlng) {   
                 // Calculations for radius. Same as bellow
-                var scaleFactor = 12,
                 area = feature.properties.total * scaleFactor;
                 return L.circleMarker(latlng, {     
-                    radius: Math.sqrt(area/Math.PI)*2,
+                    radius: Math.sqrt(area/Math.PI) * multplicateur,
                     /*fillColor: feature.properties.color, */
                     fillColor: "red", 
                     color: '#537898',   
@@ -281,9 +280,8 @@
                                "<b>" + String(feature.properties.total) +
                                "</b> cas";
                 // Calculations for radius in function of field 'total'
-                var scaleFactor = 12,
                 area = feature.properties.total * scaleFactor;
-                radius =  Math.sqrt(area/Math.PI)*2
+                radius =  Math.sqrt(area/Math.PI) * multplicateur
                 layer.setRadius(radius);
                 layer.bindPopup(popupContent, { offset: new L.Point(0,-radius) }); 
                 layer.on({
@@ -299,10 +297,9 @@
             },
             pointToLayer: function(feature, latlng) {   
                 // Calculations for radius. Same as bellow
-                var scaleFactor = 12,
                 area = feature.properties.total * scaleFactor;
                 return L.circleMarker(latlng, {     
-                    radius: Math.sqrt(area/Math.PI)*2,
+                    radius: Math.sqrt(area/Math.PI) * multplicateur,
                     /*fillColor: feature.properties.color, */
                     fillColor: "red", 
                     color: '#537898',   
@@ -318,9 +315,8 @@
                                "<b>" + String(feature.properties.total) +
                                "</b> cas";
                 // Calculations for radius in function of field 'total'
-                var scaleFactor = 12,
                 area = feature.properties.total * scaleFactor;
-                radius =  Math.sqrt(area/Math.PI)*2
+                radius =  Math.sqrt(area/Math.PI) * multplicateur
                 layer.setRadius(radius);
                 layer.bindPopup(popupContent, { offset: new L.Point(0,-radius) }); 
                 layer.on({
@@ -336,10 +332,9 @@
             },
             pointToLayer: function(feature, latlng) {   
                 // Calculations for radius. Same as bellow
-                var scaleFactor = 12,
                 area = feature.properties.total * scaleFactor;
                 return L.circleMarker(latlng, {     
-                    radius: Math.sqrt(area/Math.PI)*2,
+                    radius: Math.sqrt(area/Math.PI) * multplicateur,
                     /*fillColor: feature.properties.color, */
                     fillColor: "red", 
                     color: '#537898',   
@@ -420,9 +415,19 @@ function updatePropSymbols(timestamp, step) {
     }
     // step == 'week'
     else {
-        popupContent = "<b>" + props.name + " </b><br>" +
-                       "<b>" + String(props[timestamp]) +
-                       "</b> cas dans la semaine " + timestamp;
+        if (parseInt(timestamp) <= 54)
+            {
+                popupContent = "<b>" + props.name + " </b><br>" +
+                           "<b>" + String(props[timestamp]) +
+                           "</b> cas dans la semaine " + timestamp + " de 2014";
+            }
+        else
+            {
+                semaine = parseInt(timestamp) - 53
+                popupContent = "<b>" + props.name + " </b><br>" +
+                           "<b>" + String(props[timestamp]) +
+                           "</b> cas dans la semaine " + semaine + " de 2015";
+            }
     };               
     layer.setRadius(radius);
     layer.bindPopup(popupContent, { offset: new L.Point(0,-radius) }); 
@@ -440,9 +445,9 @@ function updatePropSymbols(timestamp, step) {
 } 
 
 function calcPropRadius(attributeValue) {         
-    var scaleFactor = 12,  // value dependent upon particular data set
+  // value dependent upon particular data set
         area = attributeValue * scaleFactor; 
-    return Math.sqrt(area/Math.PI)*2;       
+    return Math.sqrt(area/Math.PI) * multplicateur;       
 }
 // end calcPropRadius
 
@@ -463,7 +468,7 @@ function createLegend(min, max) {
 
         var legendContainer = L.DomUtil.create("div", "legend"),  
             symbolsContainer = L.DomUtil.create("div", "symbolsContainer"),
-            classes = [1, 10, 40], 
+            classes = [1, 50, 100], 
 
             diameter,
             diameters = [];
@@ -475,7 +480,7 @@ function createLegend(min, max) {
         for (var i = 0; i < classes.length; i++) {  
 
             legendCircle = L.DomUtil.create("div", "legendCircle");  
-            diameter = calcPropRadius(classes[i])*2; 
+            diameter = calcPropRadius(classes[i]) * multplicateur; 
             diameters.push(diameter);               
             var lastdiameter;                   
             if (diameters[i-1]){
@@ -515,8 +520,14 @@ function createSliderUI(timestamps, step) {
 
                 updatePropSymbols($(this).val().toString(), 'week');
                 $('output.temporal-legend').removeAttr('id');
-                $(".temporal-legend").text('Semaine ' + this.value);
-                semaine_map = this.value;
+                if (this.value < 54) {
+                    $(".temporal-legend").text('Semaine ' + this.value + ' de 2014');
+                    semaine_map = this.value + '_2014';
+                }
+                else{
+                    $(".temporal-legend").text('Semaine ' + parseInt(this.value - 53) + ' de 2015');
+                    semaine_map = parseInt(this.value - 53) + '_2015';
+                };
             });
         }
         // step == 'day'
@@ -577,8 +588,8 @@ function createTemporalLegend(startTimestamp, step) {
     }
     else{
 
-        $(".temporal-legend").text('Semaine ' + startTimestamp); 
-        semaine_map = startTimestamp;
+        $(".temporal-legend").text('Semaine ' + parseInt(startTimestamp - 53) + ' de 2015'); 
+        semaine_map = parseInt(startTimestamp - 53) + '_2015';
     };
 }
 ///////////////////////////////////////////////////////////////////
@@ -789,7 +800,7 @@ $("select").change(
 
             $exportCSV.click(function () {
                 var csv = $table.table2CSV({
-                    header: ['Prefecture', 'Sous-oréfecture', '# Cas'],
+                    header: ['Prefecture', 'Sous-prefecture', '# Cas'],
                     delivery: 'value'
                 });
  
@@ -876,7 +887,7 @@ $("select").change(
     };
     printMap.addTo(map); 
 
-    if (bowser.msie) {
+    if (L.Browser.ie) {
       $('button.bprint').hide();
     }
 
