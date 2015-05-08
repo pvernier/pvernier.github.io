@@ -160,8 +160,11 @@
                 else if (suffixe_file === "4") {
                     suffix = '21_derniers_jours_' + auj;
                 }
+                else if (suffixe_file === "5") {
+                    suffix = 'cumul_2015_' + auj;
+                }
                 else{
-                    suffix = '2015_' + auj;
+                    suffix = 'cumul_' + auj;
                 };
                 
                 $("a#print").attr("download", 'cas_confirmes_' + suffix + '.png')
@@ -242,6 +245,41 @@
 
 
         var cumulative = L.geoJson(data_cumulative, {  
+            onEachFeature: function (feature, layer) {
+                popupContent = "<b>" + feature.properties.name + " </b><br>" +
+                               "<b>" + String(feature.properties.total) +
+                               "</b> cas";
+                // Calculations for radius in function of field 'total'
+                area = feature.properties.total * scaleFactor;
+                radius =  Math.sqrt(area/Math.PI) * multplicateur
+                layer.setRadius(radius);
+                layer.bindPopup(popupContent, { offset: new L.Point(0,-radius) }); 
+                layer.on({
+                    mouseover: function(e) {
+                        this.openPopup();
+                        this.setStyle({color: 'yellow', weight: 2});
+                    },
+                    mouseout: function(e) {
+                        this.closePopup();
+                        this.setStyle({color: '#537898', weight: 1});     
+                    }
+                });
+            },
+            pointToLayer: function(feature, latlng) {   
+                // Calculations for radius. Same as bellow
+                area = feature.properties.total * scaleFactor;
+                return L.circleMarker(latlng, {     
+                    radius: Math.sqrt(area/Math.PI) * multplicateur,
+                    /*fillColor: feature.properties.color, */
+                    fillColor: "red", 
+                    color: '#537898',   
+                    weight: 1,  
+                    fillOpacity: 0.6  
+                });
+            }
+        });
+
+        var cumulative_2015 = L.geoJson(data_cumulative_2015, {  
             onEachFeature: function (feature, layer) {
                 popupContent = "<b>" + feature.properties.name + " </b><br>" +
                                "<b>" + String(feature.properties.total) +
@@ -608,7 +646,7 @@ function createTemporalLegend(startTimestamp, step) {
 var dropdmenu = L.control({position: 'topright'});
 dropdmenu.onAdd = function (map) {
     var div = L.DomUtil.create('div', 'info dropdmenu');
-    div.innerHTML = '<select class="form-control choix_temp"><option value="1">Cas confirmés par jours</option><option value="2">Cas confirmés par semaines</option><option value="3">Cas confirmés - 7 derniers jours</option><option value="4">Cas confirmés - 21 derniers jours</option><option value="5">Cas confirmés - 2015</option></select>';
+    div.innerHTML = '<select class="form-control choix_temp"><option value="1">Cas confirmés par jours</option><option value="2">Cas confirmés par semaines</option><option value="3">Cas confirmés - 7 derniers jours</option><option value="4">Cas confirmés - 21 derniers jours</option><option value="5">Cas confirmés - 2015</option><option value="6">Cas confirmés - Depuis le début</option></select>';
     div.firstChild.onmousedown = div.firstChild.ondblclick = L.DomEvent.stopPropagation;
     return div;
 };
@@ -770,16 +808,16 @@ $("select").change(
 
 
     }
-    // value = "5"
-    else {
+    else if ($(this).val() == "5") {
         $("output.temporal-legend").remove();
         $("input.range-slider").remove();
 
         map.removeLayer(cases);
         map.removeLayer(last_7d);
         map.removeLayer(last_21d);
+        map.removeLayer(cumulative);
 
-        map.addLayer(cumulative);
+        map.addLayer(cumulative_2015);
 
         $('div.panel').show();
         $('div.panel-heading').empty()
@@ -829,7 +867,68 @@ $("select").change(
 
         });
 
-    }; 
+    }
+    // value = "6"
+    else {
+        $("output.temporal-legend").remove();
+        $("input.range-slider").remove();
+
+        map.removeLayer(cases);
+        map.removeLayer(last_7d);
+        map.removeLayer(last_21d);
+        map.removeLayer(cumulative_2015);
+
+        map.addLayer(cumulative);
+
+        $('div.panel').show();
+        $('div.panel-heading').empty()
+        $('div.panel-heading').append('<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>Nombre de cas confirmés par sous-préfectures depuis lde début')
+
+        $(function ()  
+            { $(".glyphicon-info-sign").tooltip({placement : 'auto', title: "Cliquez sur les colonnes du tableau pour le réordonner", container: 'body'});  
+        }); 
+        jPut.users.data = table_cumul;
+
+        $('.table').each(function () {
+            var $table = $(this);
+
+            var $exportCSV = $('<span class="glyphicon glyphicon-save" aria-hidden="true">');
+            $exportCSV.appendTo('div.panel-heading');
+
+            $(function ()  
+            { $(".glyphicon-save").tooltip({placement : 'auto', title: "Cliquez pour sauvegarder au format CSV", container: 'body'});  
+            });
+
+            $exportCSV.click(function () {
+                var csv = $table.table2CSV({
+                    header: ['Prefecture', 'Sous-prefecture', '# Cas'],
+                    delivery: 'value'
+                });
+ 
+        var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+
+        fichier = 'cas_cumul_2015_05_7.csv'
+        if (navigator.msSaveBlob) { // IE 10+
+            navigator.msSaveBlob(blob, fichier);
+        } 
+        else {
+            var link = document.createElement("a");
+            if (link.download !== undefined) { // feature detection
+                // Browsers that support HTML5 download attribute
+                var url = URL.createObjectURL(blob);
+                link.setAttribute("href", url);
+                link.setAttribute("download", fichier);
+                link.style = "visibility:hidden";
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+        }
+            });
+
+        });
+
+    };
 })
 // ----------------- End drop down -----------------
 
@@ -898,12 +997,7 @@ $("select").change(
 
 
     </script>
-
       
-       <!--  <h1>Bootstrap starter template</h1>
-        <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
-      </div> -->
-
     
     </div>
       
