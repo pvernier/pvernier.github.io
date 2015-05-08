@@ -40,11 +40,11 @@
     <script src='code/data/table_7d.json'></script>
     <script src='code/data/table_21d.json'></script>
     <script src='code/data/table_cumul.json'></script>
-    <script src="data_per_day.geojson" type="text/javascript"></script>
-    <script src="data_per_week.geojson" type="text/javascript"></script>
-    <script src="cumulative_daily.geojson" type="text/javascript"></script>
-    <script src="last_7d_daily.geojson" type="text/javascript"></script>
-    <script src="last_21d_daily.geojson" type="text/javascript"></script>
+    <script src="python/data_per_day.geojson" type="text/javascript"></script>
+    <script src="python/data_per_week.geojson" type="text/javascript"></script>
+    <script src="python/cumulative_daily.geojson" type="text/javascript"></script>
+    <script src="python/last_7d_daily.geojson" type="text/javascript"></script>
+    <script src="python/last_21d_daily.geojson" type="text/javascript"></script>
 
 
      
@@ -126,6 +126,8 @@
         var cases;
         var semaine_map;
         var jour_map;
+        var multplicateur = 1.7;
+        var scaleFactor = 11;
          var map = L.map('map', { 
                 center: [10, -11.3441], 
                 zoom: 7,    
@@ -243,9 +245,9 @@
                                "<b>" + String(feature.properties.total) +
                                "</b> cas";
                 // Calculations for radius in function of field 'total'
-                var scaleFactor = 12,
+                
                 area = feature.properties.total * scaleFactor;
-                radius =  Math.sqrt(area/Math.PI)*2
+                radius =  Math.sqrt(area/Math.PI) * multplicateur
                 layer.setRadius(radius);
                 layer.bindPopup(popupContent, { offset: new L.Point(0,-radius) }); 
                 layer.on({
@@ -261,10 +263,9 @@
             },
             pointToLayer: function(feature, latlng) {   
                 // Calculations for radius. Same as bellow
-                var scaleFactor = 12,
                 area = feature.properties.total * scaleFactor;
                 return L.circleMarker(latlng, {     
-                    radius: Math.sqrt(area/Math.PI)*2,
+                    radius: Math.sqrt(area/Math.PI) * multplicateur,
                     /*fillColor: feature.properties.color, */
                     fillColor: "red", 
                     color: '#537898',   
@@ -280,9 +281,8 @@
                                "<b>" + String(feature.properties.total) +
                                "</b> cas";
                 // Calculations for radius in function of field 'total'
-                var scaleFactor = 12,
                 area = feature.properties.total * scaleFactor;
-                radius =  Math.sqrt(area/Math.PI)*2
+                radius =  Math.sqrt(area/Math.PI) * multplicateur
                 layer.setRadius(radius);
                 layer.bindPopup(popupContent, { offset: new L.Point(0,-radius) }); 
                 layer.on({
@@ -298,10 +298,9 @@
             },
             pointToLayer: function(feature, latlng) {   
                 // Calculations for radius. Same as bellow
-                var scaleFactor = 12,
                 area = feature.properties.total * scaleFactor;
                 return L.circleMarker(latlng, {     
-                    radius: Math.sqrt(area/Math.PI)*2,
+                    radius: Math.sqrt(area/Math.PI) * multplicateur,
                     /*fillColor: feature.properties.color, */
                     fillColor: "red", 
                     color: '#537898',   
@@ -317,9 +316,8 @@
                                "<b>" + String(feature.properties.total) +
                                "</b> cas";
                 // Calculations for radius in function of field 'total'
-                var scaleFactor = 12,
                 area = feature.properties.total * scaleFactor;
-                radius =  Math.sqrt(area/Math.PI)*2
+                radius =  Math.sqrt(area/Math.PI) * multplicateur
                 layer.setRadius(radius);
                 layer.bindPopup(popupContent, { offset: new L.Point(0,-radius) }); 
                 layer.on({
@@ -335,7 +333,6 @@
             },
             pointToLayer: function(feature, latlng) {   
                 // Calculations for radius. Same as bellow
-                var scaleFactor = 12,
                 area = feature.properties.total * scaleFactor;
                 return L.circleMarker(latlng, {     
                     radius: Math.sqrt(area/Math.PI)*2,
@@ -419,9 +416,22 @@ function updatePropSymbols(timestamp, step) {
     }
     // step == 'week'
     else {
-        popupContent = "<b>" + props.name + " </b><br>" +
+        if (parseInt(timestamp) <= 54)
+            {
+                popupContent = "<b>" + props.name + " </b><br>" +
+                           "<b>" + String(props[timestamp]) +
+                           "</b> cas dans la semaine " + timestamp + " de 2014";
+            }
+        else
+            {
+                semaine = parseInt(timestamp) - 53
+                popupContent = "<b>" + props.name + " </b><br>" +
+                           "<b>" + String(props[timestamp]) +
+                           "</b> cas dans la semaine " + semaine + " de 2015";
+            }
+        /*popupContent = "<b>" + props.name + " </b><br>" +
                        "<b>" + String(props[timestamp]) +
-                       "</b> cas dans la semaine " + timestamp;
+                       "</b> cas dans la semaine " + timestamp;*/
     };               
     layer.setRadius(radius);
     layer.bindPopup(popupContent, { offset: new L.Point(0,-radius) }); 
@@ -439,15 +449,16 @@ function updatePropSymbols(timestamp, step) {
 } 
 
 function calcPropRadius(attributeValue) {         
-    var scaleFactor = 12,  // value dependent upon particular data set
         area = attributeValue * scaleFactor; 
-    return Math.sqrt(area/Math.PI)*2;       
+    return Math.sqrt(area/Math.PI) * multplicateur;       
 }
 // end calcPropRadius
 
 // A ameliorer !!!
 function createLegend(min, max) {
-             
+    console.log(min);
+    console.log(max);
+
     if (min < 10) { 
         min = 1; 
     }
@@ -462,7 +473,8 @@ function createLegend(min, max) {
 
         var legendContainer = L.DomUtil.create("div", "legend"),  
             symbolsContainer = L.DomUtil.create("div", "symbolsContainer"),
-            classes = [1, 10, 40], 
+            classes = [1, 50, 100], 
+            //classes = [1, parseInt(max/2), max], 
 
             diameter,
             diameters = [];
@@ -474,7 +486,7 @@ function createLegend(min, max) {
         for (var i = 0; i < classes.length; i++) {  
 
             legendCircle = L.DomUtil.create("div", "legendCircle");  
-            diameter = calcPropRadius(classes[i])*2; 
+            diameter = calcPropRadius(classes[i]) * multplicateur; 
             diameters.push(diameter);               
             var lastdiameter;                   
             if (diameters[i-1]){
@@ -516,12 +528,14 @@ function createSliderUI(timestamps, step) {
                 $('output.temporal-legend').removeAttr('id');
                 if (this.value < 54) {
                     $(".temporal-legend").text('Semaine ' + this.value + ' de 2014');
+                    semaine_map = this.value + '_2014';
                 }
                 else{
                     $(".temporal-legend").text('Semaine ' + parseInt(this.value - 53) + ' de 2015');
+                    semaine_map = parseInt(this.value - 53) + '_2015';
                 };
                 
-                semaine_map = this.value;
+                
             });
         }
         // step == 'day'
@@ -584,7 +598,7 @@ function createTemporalLegend(startTimestamp, step) {
 
         //$(".temporal-legend").text('Semaine ' + startTimestamp); 
         $(".temporal-legend").text('Semaine ' + parseInt(startTimestamp - 53) + ' de 2015');
-        semaine_map = startTimestamp;
+        semaine_map = parseInt(startTimestamp - 53) + '_2015';
     };
 }
 ///////////////////////////////////////////////////////////////////
