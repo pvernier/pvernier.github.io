@@ -663,6 +663,7 @@ $("select").change(
 
         map.removeLayer(cases);
         map.removeLayer(cumulative);
+        map.removeLayer(cumulative_2015);
         map.removeLayer(last_7d);
         map.removeLayer(last_21d);
 
@@ -680,6 +681,7 @@ $("select").change(
 
         map.removeLayer(cases);
         map.removeLayer(cumulative);
+        map.removeLayer(cumulative_2015);
         map.removeLayer(last_7d);
         map.removeLayer(last_21d);
 
@@ -696,6 +698,7 @@ $("select").change(
 
       map.removeLayer(cases);
       map.removeLayer(cumulative);
+      map.removeLayer(cumulative_2015);
       map.removeLayer(last_21d);
 
       map.addLayer(last_7d);
@@ -755,6 +758,7 @@ $("select").change(
 
         map.removeLayer(cases);
         map.removeLayer(cumulative);
+        map.removeLayer(cumulative_2015);
         map.removeLayer(last_7d);
         
         map.addLayer(last_21d);
@@ -826,7 +830,7 @@ $("select").change(
         $(function ()  
             { $(".glyphicon-info-sign").tooltip({placement : 'auto', title: "Cliquez sur les colonnes du tableau pour le réordonner", container: 'body'});  
         }); 
-        jPut.users.data = table_cumul;
+        jPut.users.data = table_cumul_2015;
 
         $('.table').each(function () {
             var $table = $(this);
