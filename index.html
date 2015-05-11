@@ -40,11 +40,9 @@
     <script src='code/data/table_7d.json'></script>
     <script src='code/data/table_21d.json'></script>
     <script src='code/data/table_cumul.json'></script>
-    <script src='code/data/table_cumul_2015.json'></script>
     <script src="code/data/data_per_day.geojson" type="text/javascript"></script>
     <script src="code/data/data_per_week.geojson" type="text/javascript"></script>
     <script src="code/data/cumulative_daily.geojson" type="text/javascript"></script>
-    <script src="code/data/cumulative_daily_2015.geojson" type="text/javascript"></script>
     <script src="code/data/last_7d_daily.geojson" type="text/javascript"></script>
     <script src="code/data/last_21d_daily.geojson" type="text/javascript"></script>
 
@@ -128,8 +126,6 @@
         var cases;
         var semaine_map;
         var jour_map;
-        var multplicateur = 1.7;
-        var scaleFactor = 11;
          var map = L.map('map', { 
                 center: [10, -11.3441], 
                 zoom: 7,    
@@ -160,11 +156,8 @@
                 else if (suffixe_file === "4") {
                     suffix = '21_derniers_jours_' + auj;
                 }
-                else if (suffixe_file === "5") {
-                    suffix = 'cumul_2015_' + auj;
-                }
                 else{
-                    suffix = 'cumul_' + auj;
+                    suffix = '2015_' + auj;
                 };
                 
                 $("a#print").attr("download", 'cas_confirmes_' + suffix + '.png')
@@ -250,8 +243,9 @@
                                "<b>" + String(feature.properties.total) +
                                "</b> cas";
                 // Calculations for radius in function of field 'total'
+                var scaleFactor = 12,
                 area = feature.properties.total * scaleFactor;
-                radius =  Math.sqrt(area/Math.PI) * multplicateur
+                radius =  Math.sqrt(area/Math.PI)*2
                 layer.setRadius(radius);
                 layer.bindPopup(popupContent, { offset: new L.Point(0,-radius) }); 
                 layer.on({
@@ -267,44 +261,10 @@
             },
             pointToLayer: function(feature, latlng) {   
                 // Calculations for radius. Same as bellow
+                var scaleFactor = 12,
                 area = feature.properties.total * scaleFactor;
                 return L.circleMarker(latlng, {     
-                    radius: Math.sqrt(area/Math.PI) * multplicateur,
-                    /*fillColor: feature.properties.color, */
-                    fillColor: "red", 
-                    color: '#537898',   
-                    weight: 1,  
-                    fillOpacity: 0.6  
-                });
-            }
-        });
-
-        var cumulative_2015 = L.geoJson(data_cumulative_2015, {  
-            onEachFeature: function (feature, layer) {
-                popupContent = "<b>" + feature.properties.name + " </b><br>" +
-                               "<b>" + String(feature.properties.total) +
-                               "</b> cas";
-                // Calculations for radius in function of field 'total'
-                area = feature.properties.total * scaleFactor;
-                radius =  Math.sqrt(area/Math.PI) * multplicateur
-                layer.setRadius(radius);
-                layer.bindPopup(popupContent, { offset: new L.Point(0,-radius) }); 
-                layer.on({
-                    mouseover: function(e) {
-                        this.openPopup();
-                        this.setStyle({color: 'yellow', weight: 2});
-                    },
-                    mouseout: function(e) {
-                        this.closePopup();
-                        this.setStyle({color: '#537898', weight: 1});     
-                    }
-                });
-            },
-            pointToLayer: function(feature, latlng) {   
-                // Calculations for radius. Same as bellow
-                area = feature.properties.total * scaleFactor;
-                return L.circleMarker(latlng, {     
-                    radius: Math.sqrt(area/Math.PI) * multplicateur,
+                    radius: Math.sqrt(area/Math.PI)*2,
                     /*fillColor: feature.properties.color, */
                     fillColor: "red", 
                     color: '#537898',   
@@ -320,8 +280,9 @@
                                "<b>" + String(feature.properties.total) +
                                "</b> cas";
                 // Calculations for radius in function of field 'total'
+                var scaleFactor = 12,
                 area = feature.properties.total * scaleFactor;
-                radius =  Math.sqrt(area/Math.PI) * multplicateur
+                radius =  Math.sqrt(area/Math.PI)*2
                 layer.setRadius(radius);
                 layer.bindPopup(popupContent, { offset: new L.Point(0,-radius) }); 
                 layer.on({
@@ -337,9 +298,10 @@
             },
             pointToLayer: function(feature, latlng) {   
                 // Calculations for radius. Same as bellow
+                var scaleFactor = 12,
                 area = feature.properties.total * scaleFactor;
                 return L.circleMarker(latlng, {     
-                    radius: Math.sqrt(area/Math.PI) * multplicateur,
+                    radius: Math.sqrt(area/Math.PI)*2,
                     /*fillColor: feature.properties.color, */
                     fillColor: "red", 
                     color: '#537898',   
@@ -355,8 +317,9 @@
                                "<b>" + String(feature.properties.total) +
                                "</b> cas";
                 // Calculations for radius in function of field 'total'
+                var scaleFactor = 12,
                 area = feature.properties.total * scaleFactor;
-                radius =  Math.sqrt(area/Math.PI) * multplicateur
+                radius =  Math.sqrt(area/Math.PI)*2
                 layer.setRadius(radius);
                 layer.bindPopup(popupContent, { offset: new L.Point(0,-radius) }); 
                 layer.on({
@@ -372,9 +335,10 @@
             },
             pointToLayer: function(feature, latlng) {   
                 // Calculations for radius. Same as bellow
+                var scaleFactor = 12,
                 area = feature.properties.total * scaleFactor;
                 return L.circleMarker(latlng, {     
-                    radius: Math.sqrt(area/Math.PI) * multplicateur,
+                    radius: Math.sqrt(area/Math.PI)*2,
                     /*fillColor: feature.properties.color, */
                     fillColor: "red", 
                     color: '#537898',   
@@ -455,19 +419,9 @@ function updatePropSymbols(timestamp, step) {
     }
     // step == 'week'
     else {
-        if (parseInt(timestamp) <= 54)
-            {
-                popupContent = "<b>" + props.name + " </b><br>" +
-                           "<b>" + String(props[timestamp]) +
-                           "</b> cas dans la semaine " + timestamp + " de 2014";
-            }
-        else
-            {
-                semaine = parseInt(timestamp) - 53
-                popupContent = "<b>" + props.name + " </b><br>" +
-                           "<b>" + String(props[timestamp]) +
-                           "</b> cas dans la semaine " + semaine + " de 2015";
-            }
+        popupContent = "<b>" + props.name + " </b><br>" +
+                       "<b>" + String(props[timestamp]) +
+                       "</b> cas dans la semaine " + timestamp;
     };               
     layer.setRadius(radius);
     layer.bindPopup(popupContent, { offset: new L.Point(0,-radius) }); 
@@ -485,9 +439,9 @@ function updatePropSymbols(timestamp, step) {
 } 
 
 function calcPropRadius(attributeValue) {         
-  // value dependent upon particular data set
+    var scaleFactor = 12,  // value dependent upon particular data set
         area = attributeValue * scaleFactor; 
-    return Math.sqrt(area/Math.PI) * multplicateur;       
+    return Math.sqrt(area/Math.PI)*2;       
 }
 // end calcPropRadius
 
@@ -508,7 +462,7 @@ function createLegend(min, max) {
 
         var legendContainer = L.DomUtil.create("div", "legend"),  
             symbolsContainer = L.DomUtil.create("div", "symbolsContainer"),
-            classes = [1, 50, 100], 
+            classes = [1, 10, 40], 
 
             diameter,
             diameters = [];
@@ -520,7 +474,7 @@ function createLegend(min, max) {
         for (var i = 0; i < classes.length; i++) {  
 
             legendCircle = L.DomUtil.create("div", "legendCircle");  
-            diameter = calcPropRadius(classes[i]) * multplicateur; 
+            diameter = calcPropRadius(classes[i])*2; 
             diameters.push(diameter);               
             var lastdiameter;                   
             if (diameters[i-1]){
@@ -560,14 +514,8 @@ function createSliderUI(timestamps, step) {
 
                 updatePropSymbols($(this).val().toString(), 'week');
                 $('output.temporal-legend').removeAttr('id');
-                if (this.value < 54) {
-                    $(".temporal-legend").text('Semaine ' + this.value + ' de 2014');
-                    semaine_map = this.value + '_2014';
-                }
-                else{
-                    $(".temporal-legend").text('Semaine ' + parseInt(this.value - 53) + ' de 2015');
-                    semaine_map = parseInt(this.value - 53) + '_2015';
-                };
+                $(".temporal-legend").text('Semaine ' + this.value);
+                semaine_map = this.value;
             });
         }
         // step == 'day'
@@ -628,8 +576,8 @@ function createTemporalLegend(startTimestamp, step) {
     }
     else{
 
-        $(".temporal-legend").text('Semaine ' + parseInt(startTimestamp - 53) + ' de 2015'); 
-        semaine_map = parseInt(startTimestamp - 53) + '_2015';
+        $(".temporal-legend").text('Semaine ' + startTimestamp); 
+        semaine_map = startTimestamp;
     };
 }
 ///////////////////////////////////////////////////////////////////
@@ -646,7 +594,7 @@ function createTemporalLegend(startTimestamp, step) {
 var dropdmenu = L.control({position: 'topright'});
 dropdmenu.onAdd = function (map) {
     var div = L.DomUtil.create('div', 'info dropdmenu');
-    div.innerHTML = '<select class="form-control choix_temp"><option value="1">Cas confirmés par jours</option><option value="2">Cas confirmés par semaines</option><option value="3">Cas confirmés - 7 derniers jours</option><option value="4">Cas confirmés - 21 derniers jours</option><option value="5">Cas confirmés - 2015</option><option value="6">Cas confirmés - Depuis le début</option></select>';
+    div.innerHTML = '<select class="form-control choix_temp"><option value="1">Cas confirmés par jours</option><option value="2">Cas confirmés par semaines</option><option value="3">Cas confirmés - 7 derniers jours</option><option value="4">Cas confirmés - 21 derniers jours</option><option value="5">Cas confirmés - 2015</option></select>';
     div.firstChild.onmousedown = div.firstChild.ondblclick = L.DomEvent.stopPropagation;
     return div;
 };
@@ -663,7 +611,6 @@ $("select").change(
 
         map.removeLayer(cases);
         map.removeLayer(cumulative);
-        map.removeLayer(cumulative_2015);
         map.removeLayer(last_7d);
         map.removeLayer(last_21d);
 
@@ -681,7 +628,6 @@ $("select").change(
 
         map.removeLayer(cases);
         map.removeLayer(cumulative);
-        map.removeLayer(cumulative_2015);
         map.removeLayer(last_7d);
         map.removeLayer(last_21d);
 
@@ -698,7 +644,6 @@ $("select").change(
 
       map.removeLayer(cases);
       map.removeLayer(cumulative);
-      map.removeLayer(cumulative_2015);
       map.removeLayer(last_21d);
 
       map.addLayer(last_7d);
@@ -729,7 +674,7 @@ $("select").change(
                 });
  
         var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-        fichier = 'cas_7_derniers_jours_2015_05_7.csv'
+        fichier = 'cas_7_derniers_jours_2015_05_10.csv'
         if (navigator.msSaveBlob) { // IE 10+
             navigator.msSaveBlob(blob, fichier);
         } 
@@ -758,7 +703,6 @@ $("select").change(
 
         map.removeLayer(cases);
         map.removeLayer(cumulative);
-        map.removeLayer(cumulative_2015);
         map.removeLayer(last_7d);
         
         map.addLayer(last_21d);
@@ -789,7 +733,7 @@ $("select").change(
                 });
  
         var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-        fichier = 'cas_21_derniers_jours_2015_05_7.csv'
+        fichier = 'cas_21_derniers_jours_2015_05_10.csv'
         if (navigator.msSaveBlob) { // IE 10+
             navigator.msSaveBlob(blob, fichier);
         } 
@@ -812,67 +756,7 @@ $("select").change(
 
 
     }
-    else if ($(this).val() == "5") {
-        $("output.temporal-legend").remove();
-        $("input.range-slider").remove();
-
-        map.removeLayer(cases);
-        map.removeLayer(last_7d);
-        map.removeLayer(last_21d);
-        map.removeLayer(cumulative);
-
-        map.addLayer(cumulative_2015);
-
-        $('div.panel').show();
-        $('div.panel-heading').empty()
-        $('div.panel-heading').append('<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>Nombre de cas confirmés par sous-préfectures en 2015')
-
-        $(function ()  
-            { $(".glyphicon-info-sign").tooltip({placement : 'auto', title: "Cliquez sur les colonnes du tableau pour le réordonner", container: 'body'});  
-        }); 
-        jPut.users.data = table_cumul_2015;
-
-        $('.table').each(function () {
-            var $table = $(this);
-
-            var $exportCSV = $('<span class="glyphicon glyphicon-save" aria-hidden="true">');
-            $exportCSV.appendTo('div.panel-heading');
-
-            $(function ()  
-            { $(".glyphicon-save").tooltip({placement : 'auto', title: "Cliquez pour sauvegarder au format CSV", container: 'body'});  
-            });
-
-            $exportCSV.click(function () {
-                var csv = $table.table2CSV({
-                    header: ['Prefecture', 'Sous-prefecture', '# Cas'],
-                    delivery: 'value'
-                });
- 
-        var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-
-        fichier = 'cas_cumul_2015_2015_05_7.csv'
-        if (navigator.msSaveBlob) { // IE 10+
-            navigator.msSaveBlob(blob, fichier);
-        } 
-        else {
-            var link = document.createElement("a");
-            if (link.download !== undefined) { // feature detection
-                // Browsers that support HTML5 download attribute
-                var url = URL.createObjectURL(blob);
-                link.setAttribute("href", url);
-                link.setAttribute("download", fichier);
-                link.style = "visibility:hidden";
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-            }
-        }
-            });
-
-        });
-
-    }
-    // value = "6"
+    // value = "5"
     else {
         $("output.temporal-legend").remove();
         $("input.range-slider").remove();
@@ -880,13 +764,12 @@ $("select").change(
         map.removeLayer(cases);
         map.removeLayer(last_7d);
         map.removeLayer(last_21d);
-        map.removeLayer(cumulative_2015);
 
         map.addLayer(cumulative);
 
         $('div.panel').show();
         $('div.panel-heading').empty()
-        $('div.panel-heading').append('<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>Nombre de cas confirmés par sous-préfectures depuis lde début')
+        $('div.panel-heading').append('<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>Nombre de cas confirmés par sous-préfectures en 2015')
 
         $(function ()  
             { $(".glyphicon-info-sign").tooltip({placement : 'auto', title: "Cliquez sur les colonnes du tableau pour le réordonner", container: 'body'});  
@@ -911,7 +794,7 @@ $("select").change(
  
         var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
 
-        fichier = 'cas_cumul_2015_05_7.csv'
+        fichier = 'cas_cumul_2015_2015_05_10.csv'
         if (navigator.msSaveBlob) { // IE 10+
             navigator.msSaveBlob(blob, fichier);
         } 
@@ -932,7 +815,7 @@ $("select").change(
 
         });
 
-    };
+    }; 
 })
 // ----------------- End drop down -----------------
 
@@ -1001,7 +884,12 @@ $("select").change(
 
 
     </script>
+
       
+       <!--  <h1>Bootstrap starter template</h1>
+        <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
+      </div> -->
+
     
     </div>
       
@@ -1011,7 +899,7 @@ $("select").change(
      
     <script>  
 $(function ()  
-{ $("#miseAjour").popover({title: '<b>Dates de mises à jour</b>', content: "Dernière mise à jour : 8/05/2015<br />Dernier cas confirmé : 05/05/2015 "});   
+{ $("#miseAjour").popover({title: '<b>Dates de mises à jour</b>', content: "Dernière mise à jour : 11/05/2015<br />Dernier cas confirmé : 10/05/2015 "});   
 });  
  
 $(function ()  
