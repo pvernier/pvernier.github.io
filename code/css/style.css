@@ -1,0 +1,384 @@
+body {
+  padding-top: 50px;
+}
+div.container {
+    box-sizing: content-box;
+}
+a.navbar-brand{
+    width:200px;
+    padding: 0;
+}
+.navbar-brand > img {
+    display: inline;
+}
+a#nouv {
+    color: white;
+    text-shadow: orange 0.1em 0.1em 0.2em
+}
+.epi_content {
+  padding: 40px 15px;
+  text-align: center;
+
+}
+a#miseAjour {
+    width: 20px;
+    height: 20px;
+    padding: 0 0;
+}
+div, span {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+#map {
+    width: 75%;
+    height: 500px;
+    margin: 0 auto;
+    border: 1px solid black;
+}
+div.panel {
+    width: 65%;
+    margin: 0 auto;
+}
+span.glyphicon-info-sign {
+    display: inline-block;
+    /*width: 50%;*/
+    float: left;
+}
+span.glyphicon-save {
+    display: inline-block;
+    /*width: 50%;*/
+    float: right;
+    cursor:pointer;
+}
+th[data-sort]{
+    cursor:pointer;
+    text-align: center;
+}
+/* Menu déroulant */
+select.choix_temp {
+    width:80%;
+    height: 30px;
+    font-size : 11px;
+    position:relative;
+    right: 22px;
+}
+
+/* Bouton switch OSM */
+button.bswitch {
+    width: 30px;
+    height: 30px;
+    /*position:relative;
+    bottom:40px;
+    right: 32px;*/
+    padding: 0 0;
+}
+/* Bouton zoom initial */
+button.bzoom {
+    width: 30px;
+    height: 30px;
+    /*position:relative;
+    bottom: 80px;*/
+    padding: 0 0;
+    
+}
+/* Bouton print map */
+button.bprint {
+    width: 30px;
+    height: 30px;
+    position:relative;
+    bottom: 88px;
+    padding: 0 0;   
+}
+
+
+/* Style du slider dans la période des 3 dernieres semaine */
+.last3weeks {
+    font-weight : bold ;
+    color: #F87217; 
+    border: solid 1px #F87217;
+
+}
+
+/* Style du slider dans la période de la derniere semaine */
+.lastweek {
+    font-weight : bold ;
+    color: #E42217;
+    border: solid 1px #E42217;
+}
+
+/* Labels des pays voisins */
+em {    font-size : 12px; 
+        font-weight : bold; 
+        color: black; 
+        font-style: normal;
+    }
+
+.legend, .temporal-legend {
+    padding: 6px 10px;
+    /*font: 14px/16px Arial, Helvetica, sans-serif;*/
+    background: white;
+    background: rgba(255,255,255,0.8);
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    border-radius: 5px;
+}
+
+.legend_cumul, .temporal-legend {
+    padding: 6px 10px;
+    /*font: 14px/16px Arial, Helvetica, sans-serif;*/
+    background: white;
+    background: rgba(255,255,255,0.8);
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    border-radius: 5px;
+}
+
+h2#legendTitle {
+    font-size: 1.2em;
+    margin-top: 3px;
+}
+
+.symbolsContainer {
+    float: left;
+    margin-left: 50px;
+}
+
+.legendCircle {
+     border-radius:50%; 
+     border: 1px solid #537898; 
+     background: rgba(255, 0, 0, .6);
+     margin: 4px auto 0;
+     display: inline-block;
+}
+
+.legendCircleCumul {
+     border-radius:50%; 
+     border: 1px solid #537898; 
+     background: rgba(255, 0, 0, .6);
+     margin: 4px auto 0;
+     display: inline-block;
+}
+
+.legendValue {
+    position: absolute;
+    right: 8px;
+    font-size: 10px;
+}
+
+/* Start specific for niveau d'alerte map*/
+.legend_situation {
+    padding: 6px 8px;
+    font: 14px/16px Arial, Helvetica, sans-serif;
+    background: white;
+    background: rgba(255,255,255,0.8);
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    border-radius: 5px;   
+}
+.info h4 {
+    margin: 0 0 5px;
+    color: #777;
+}
+div.dynamic {
+    position:relative;
+    height: 70px;
+    right: 34px;
+
+    padding: 6px 8px;
+    font: 14px/16px Arial, Helvetica, sans-serif;
+    background: white;
+    background: rgba(255,255,255,0.8);
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    border-radius: 5px;   
+}
+.legend_situation {
+    line-height: 18px;
+    color: #555;
+    font-size : 12px;
+    text-align: left;   
+}
+.legend_situation i {
+    width: 18px;
+    height: 18px;
+    float: left;
+    margin-right: 8px;
+    opacity: 0.7;
+}
+.legendCircleAlerte {
+     border-radius:50%; 
+     border: 1px solid #537898; 
+     background: rgba(255, 166, 47, .6);
+     margin: 4px auto 0;
+     display: inline-block;
+}
+/* Bouton switch last 21 days */
+button.bswitch21d {
+    width: 30px;
+    height: 30px;
+    position:relative;
+    bottom: 86px;
+    padding: 0 0;
+}
+/* Bouton print map */
+button.bprint_na {
+    width: 30px;
+    height: 30px;
+    position:relative;
+    bottom: 92px;
+    padding: 0 0;   
+}
+
+/* End specific for niveau d'alerte map*/
+
+/* Start specific CTE*/
+div.cte {
+    padding: 6px 8px;
+    font: 14px/16px Arial, Helvetica, sans-serif;
+    line-height: 150%;
+    background: white;
+    background: rgba(255,255,255,0.8);
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    border-radius: 5px;   
+}
+/* Menu déroulant */
+select.CTE {
+    width:60%;
+    height: 30px;
+    font-size : 11px;
+    position:relative;
+    top: 34px;
+    left: 102px;
+}
+/* Bouton switch last 21 days */
+button.bswitch21dCTE {
+    width: 30px;
+    height: 30px;
+    position:relative;
+    right: 64px;
+    bottom: 120px;
+    padding: 0 0;
+}
+/* Bouton print */
+button.bprint_ct {
+    width: 30px;
+    height: 30px;
+    position:relative;
+    bottom: 160px;
+    right: 96px;
+    padding: 0 0;   
+}
+span#tot1 {
+    position:relative;
+    right: 280px;
+    font-weight: bold;
+}
+span#tot2 {
+    position:relative;
+    left: 10px;
+    font-weight: bold;
+}
+span#tot3 {
+    position:relative;
+    left: 80px;
+    font-weight: bold;
+}
+span#tot4 {
+    position:relative;
+    left: 180px;
+    font-weight: bold;
+}
+span#tot5 {
+    position:relative;
+    left: 280px;
+    font-weight: bold;
+}
+span#tot6 {
+    position:relative;
+    left: 350px;
+    font-weight: bold;
+}
+div.well{
+    width:60%;
+    margin: 0 auto;
+}
+div.alert {
+   width:75%; 
+   margin: 0 auto;
+}
+div.alert-warning {
+    display: none;
+    margin: 0 auto;  
+    width:60%;
+}
+div#button {
+    width:18%; 
+    margin: 0 auto;    
+}
+hr#centres {
+    width: 75%;
+    margin: 0 auto;
+}
+/* End specific for epi week*/
+/* Start specific for reticence*/
+hr {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+button.bswitchx {
+    width: 30px;
+    height: 30px;
+    position:relative;
+    right: 32px;
+    padding: 0 0;
+}
+/* Bouton zoom initial */
+button.bzoomx {
+    width: 30px;
+    height: 30px;
+    position:relative;
+    bottom: 40px;
+    padding: 0 0;   
+}
+/* Bouton print */
+button.bprint_reti {
+    width: 30px;
+    height: 30px;
+    position:relative;
+    bottom: 80px;
+    right: 64px;
+    padding: 0 0;   
+}
+/* End specific for reticence*/
+/* Start specific for liens utiles*/
+.liens_utiles {
+    width:75%; 
+    margin: 0 auto;
+    text-align: left;
+    padding:0;
+}
+.liens_utiles li {
+    list-style-type:none;
+    margin-top: 10px;
+}
+.dlmap {
+   display: none;
+   width:75%; 
+   margin: 0 auto;
+   text-align: right;
+   font-size : 12px
+}
+#wheel{
+    display: none; 
+    width:75%; 
+    margin: 0 auto;
+    text-align: right;
+    font-style: italic;
+    font-size : 12px
+
+}
+/* Start specific for sitreps*/
+.col-md-6 li {
+    list-style-type:none;
+    line-height:22px;
+}
