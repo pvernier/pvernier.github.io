@@ -1,5 +1,7 @@
 body {
   padding-top: 50px;
+  width: 98%;
+  margin: 0 auto;
 }
 div.container {
     box-sizing: content-box;
@@ -7,15 +9,37 @@ div.container {
 .navbar-brand > img {
     display: inline;
 }
-a#nouv {
-    color: white;
-    text-shadow: orange 0.1em 0.1em 0.2em
-}
-.epi_content {
-  padding: 40px 15px;
-  text-align: center;
 
+/*Juste pour dasboard_2*/
+.chart-popup {
+    width: 520px;
 }
+
+
+h6 {
+    font-weight: bold;
+    color: #3288bd;
+    text-align: center;
+}
+
+ul
+{
+    list-style-type: none;
+    color: #2171b5;
+    font-weight: bold;
+    font-size : 12px;
+}
+
+ul span {
+    font-size : 16px;
+    text-align: right;
+ }
+
+.alert_d {
+    color: #ef3b2c;
+    font-weight: bold;
+}
+
 a#miseAjour {
     width: 20px;
     height: 20px;
@@ -28,32 +52,19 @@ div, span {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    /*border: 1px solid black;*/
 }
 #map {
-    width: 75%;
     height: 500px;
+    /*width: 75%;
     margin: 0 auto;
-    border: 1px solid black;
+    border: 1px solid black;*/
 }
 div.panel {
     width: 65%;
     margin: 0 auto;
 }
-span.glyphicon-info-sign {
-    display: inline-block;
-    /*width: 50%;*/
-    float: left;
-}
-span.glyphicon-save {
-    display: inline-block;
-    /*width: 50%;*/
-    float: right;
-    cursor:pointer;
-}
-th[data-sort]{
-    cursor:pointer;
-    text-align: center;
-}
+
 /* drop down menu */
 select.choix_temp {
     width:80%;
@@ -111,11 +122,73 @@ em {    font-size : 12px;
     border-radius: 5px;
 }
 
-.temporal-legend {
-    padding: 6px 10px;
-    /*font: 14px/16px Arial, Helvetica, sans-serif;*/
-    background: white;
-    background: rgba(255,255,255,0.8);
+.legend {
+    padding: 6px 8px;
+    font: 12px Arial, Helvetica, sans-serif;
+    background: lightgrey;
+    /*background: rgba(255,255,255,0.8);*/
     box-shadow: 0 0 15px rgba(0,0,0,0.2);
-    border-radius: 5px;
+    border-radius: 5px;  
+    line-height: 18px;
+    color: #555;
+    text-align: left;  
+}
+
+
+.legend i {
+    width: 18px;
+    height: 18px;
+    float: left;
+    margin-right: 8px;
+    opacity: 0.7;
+
+}
+
+.legend span {
+    float: right;
+}
+
+span#text_cluster {
+    position:relative;
+    top: 10px;
+}
+
+.legend h5 {
+    font-weight: bold;
+    font-size: 12px;
+}
+
+
+
+i#legend_indiv_rs {
+    width: 16px;
+    height: 16px;
+    background: white;
+    border-radius: 50%;
+    position:relative;
+    left: 12px;   
+}
+
+i#legend_cluster_rs {
+    width: 40px;
+    height: 40px;
+    background: white;
+    border-radius: 50%;
+    opacity: 0.6;
+}
+
+i#legend_cluster2_rs {
+    width: 30px;
+    height: 30px;
+    background: white;
+    border-radius: 50%;
+    position:relative;
+    left: 5px;
+    top: 5px;
+    border: 1px solid #D8D8D8;
+
+}
+
+div.leaflet-control-attribution {
+    display: none;
 }

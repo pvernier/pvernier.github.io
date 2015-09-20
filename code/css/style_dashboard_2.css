@@ -1,5 +1,7 @@
 body {
   padding-top: 50px;
+  width: 98%;
+  margin: 0 auto;
 }
 div.container {
     box-sizing: content-box;
@@ -7,15 +9,37 @@ div.container {
 .navbar-brand > img {
     display: inline;
 }
-a#nouv {
-    color: white;
-    text-shadow: orange 0.1em 0.1em 0.2em
-}
-.epi_content {
-  padding: 40px 15px;
-  text-align: center;
 
+/*Juste pour dasboard_2*/
+.leaflet-popup-content-wrapper {
+    width: 520px;
 }
+
+
+h6 {
+    font-weight: bold;
+    color: #3288bd;
+    text-align: center;
+}
+
+ul
+{
+    list-style-type: none;
+    color: #2171b5;
+    font-weight: bold;
+    font-size : 12px;
+}
+
+ul span {
+    font-size : 16px;
+    text-align: right;
+ }
+
+.alert_d {
+    color: #ef3b2c;
+    font-weight: bold;
+}
+
 a#miseAjour {
     width: 20px;
     height: 20px;
@@ -28,12 +52,13 @@ div, span {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    /*border: 1px solid black;*/
 }
 #map {
-    width: 75%;
     height: 500px;
+    /*width: 75%;
     margin: 0 auto;
-    border: 1px solid black;
+    border: 1px solid black;*/
 }
 div.panel {
     width: 65%;
