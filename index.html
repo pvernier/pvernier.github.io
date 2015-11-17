@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="code/src/nvd3-master/build/nv.d3.min.css" />
     <link rel="stylesheet" href="code/src/leaflet/markercluster/MarkerCluster.css" />
     <link rel="stylesheet" href="code/src/leaflet/markercluster/MarkerCluster.Default.css" />
+    <link rel="stylesheet" href="code/src/intro/introjs.css"/>
 
     <link rel="stylesheet" href="code/css/style.css"/>
 
@@ -22,6 +23,7 @@
     
     <script src="code/src/leaflet/leaflet.js"></script>
     <script src="code/src/leaflet/leaflet.label.js"></script>
+    <script src="code/src/intro/intro.js"></script>
     <script src="code/src/nvd3-master/d3.min.js"></script>
     <script src="code/src/nvd3-master/build/nv.d3.min.js"></script> 
     <script src="code/src/leaflet/markercluster/leaflet.markercluster-src.js"></script>
@@ -59,6 +61,13 @@
     </br>
     
     <div class="row">
+        <div class="col-md-5"></div>
+        <div class="col-md-1">
+            <button id="tour" class="btn btn-large btn-info" href="javascript:void(0);" onclick="javascript:introJs().start();"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> How to use the dashboard</button>
+        </div>
+        
+    </div>
+    <div class="row">
         <div id="text" class="col-md-2">
             <div id="donuts">
                     <h6>DISTRIBUTION OF ACUTE RESPIRATORY INFECTIONS (ARI)</h6>
@@ -84,7 +93,7 @@
             </div>
     </div>
     <div class="row">
-        <div id="map" class="col-md-6">
+        <div class="col-md-6">
             <h3>Total Consultations and Number of Reporting Sites by Week</h3>
             <div id="chart_main" style="height: 400px; margin: 0 auto;">
                 <svg></svg>
@@ -272,7 +281,6 @@
 //
 // Function to display the cumulative data
 function show_cumulative(geojson_file) {
-    console.log(geojson_file);
 
     $("output.temporal-legend").remove();
     $("input.range-slider").remove();
@@ -323,9 +331,7 @@ function show_cumulative(geojson_file) {
         else{
             breaks = turf.jenks(data, "total", 1);
         };
-        
-        console.log('breaks:');
-        console.log(breaks);
+
         // I extract the unique values from breaks 
         uniq_breaks =[];  
         for (var classe in breaks) {
@@ -333,8 +339,6 @@ function show_cumulative(geojson_file) {
                 uniq_breaks.push(breaks[classe]);
             }
         }
-        console.log('uniq breaks:');
-        console.log(uniq_breaks); 
         
         for (var i = 0; i < data.features.length; i++) {
             var coords = data.features[i].geometry.coordinates;
@@ -354,7 +358,6 @@ function show_cumulative(geojson_file) {
                 };
             }
             else if (uniq_breaks.length === 3) {
-                console.log("long 3");
                 if (data.features[i].properties.total > uniq_breaks[1] && data.features[i].properties.total <= uniq_breaks[2]) {
                     myIcon = icon_large;
                 }
@@ -389,7 +392,6 @@ function show_cumulative(geojson_file) {
                 });*/
             marker.on('click', function (e) {
                     $("em").css( "display", "none" );
-                    console.log(this.options.name);
                     var camp_chart = [{"color": "#2E9AFE", "values": [], "key": "AD"},  {"color": "#FA5858", "values": [], "key": "Skin"},  {"color": "#5FB404", "values": [], "key": "ARI"}]
                      
                         for (var i = cons_Ad.features.length - 1; i >= 0; i--) {
@@ -410,7 +412,6 @@ function show_cumulative(geojson_file) {
                                 };
                             };                      
                         };
-                        console.log(camp_chart);
                         $( "h2#chart_title").text("Trend of proportion of cases of ARI, Scabies and AD in " + this.options.name);
                         nv.addGraph(function() {
                             var chart = nv.models.lineChart()
@@ -482,8 +483,6 @@ function extractDistrib(data) {
             uniq_breaks.push(breaks[classe]);
         }
     }
-    console.log('uniq breaks:');
-    console.log(uniq_breaks);
 }
 
 function updatePropSymbols(data, timestamp) {   
@@ -548,7 +547,6 @@ function updatePropSymbols(data, timestamp) {
                     };
                 }
                 else if (uniq_breaks.length === 3) {
-                    console.log("long 3");
                     if (data.features[i].properties[timestamp][0] > uniq_breaks[1] && data.features[i].properties[timestamp][0] <= uniq_breaks[2]) {
                         myIcon = icon_large;
                     }
@@ -698,7 +696,7 @@ function donut_chart(donut_file, type, week, html_id) {
       .labelsOutside(true)
       .donutRatio(0.5)     //Configure how big you want the donut hole size to be.
       .valueFormat(d3.format(',f'))
-      //.width(60)
+      //.width(100)
       ;
 
       if (html_id === "donut1") {
@@ -726,8 +724,9 @@ function donut_chart(donut_file, type, week, html_id) {
         .transition().duration(350)
         .call(chart);
 
-    return chart;
+    //d3.select(".nv-legendWrap").attr("transform", "translate(-10,-50)");
 
+    return chart;
     });
 });
 }
@@ -780,7 +779,6 @@ function dis_alert_list(week) {
 }
 
 function show_weekly(geojson_file) {
-    console.log(geojson_file);
     $("output.temporal-legend").remove();
     $("input.range-slider").remove();
     
@@ -811,7 +809,7 @@ dis_alert_list(timestamps[timestamps.length-1]);
 var dropdmenu = L.control({position: 'topright'});
 dropdmenu.onAdd = function (map) {
     var div = L.DomUtil.create('div', 'info dropdmenu');
-    div.innerHTML = '<select class="form-control choice_disease"><option value="1">All Diseases</option><option value="2">Acumal</option><option value="3">AD</option><option value="4">AFP</option><option value="5">AJS</option><option value="6">AWD</option><option value="7">BD</option><option value="8">Lesh</option><option value="9">LRTI</option><option value="10">MG</option><option value="11">Others</option><option value="12">Skin</option><option value="13">Susp. Dip</option><option value="14">Susp. HF</option><option value="15">Susp. MS</option><option value="16">Susp. NNT</option><option value="17">Susp. Pert</option><option value="18">Susp. Rabies</option><option value="19">Unexp. Fever</option><option value="20">URTI</option></select>';
+    div.innerHTML = '<select class="form-control choice_disease"><option value="1">All Diseases</option><option value="2">Malnutrition</option><option value="3">Acute Diarrhea</option><option value="4">Acute Flaccid Paralysis</option><option value="5">Acute Jaundice Syndrome</option><option value="6">Acute Watery Diarrhea</option><option value="7">Bloody Diarrhea</option><option value="8">Suspected Leishmaniasis</option><option value="9">Lower Acute Respiratory Infection</option><option value="10">Suspected Meningitis</option><option value="11">Others</option><option value="12">Skin Diseases</option><option value="13">Suspected Diphtheria</option><option value="14">Suspected Hemorrhagic Fever</option><option value="15">Suspected Measles</option><option value="16">Suspected Neonatal Tetanus</option><option value="17">Suspected Diphtheria</option><option value="18">Suspected Rabies</option><option value="19">Unexplained Fever</option><option value="20">Upper Acute Respiratory Infection</option></select>';
     div.firstChild.onmousedown = div.firstChild.ondblclick = L.DomEvent.stopPropagation;
     return div;
 };
@@ -1072,7 +1070,7 @@ if ($this.text() == "See cumulative data") {
      donut_chart("code/data/donut_by_age.json", "cumul", timestamps[timestamps.length-1], 'donut2'); 
      donut_chart("code/data/donut_by_gender.json", "cumul", timestamps[timestamps.length-1], 'donut3'); 
 
-     dis_alert_list(35);     
+     dis_alert_list(timestamps.length + 1);     
 
      if ($("select.choice_disease").val() == "1") {
         $("output.temporal-legend").remove();
@@ -1321,8 +1319,8 @@ switchOsm.addTo(map);
  d3.json("code/data/linebart_chart.json",function(error,data) {
             nv.addGraph(function() {
               var chart = nv.models.linePlusBarChart()
-                    .margin({top: 30, right: 60, bottom: 50, left: 70})
-                    //.margin({top: 0, right: 20, bottom: 0, left: 40})
+                    //.margin({top: 30, right: 60, bottom: 50, left: 70})
+                    .margin({top: 0, right: 20, bottom: 0, left: 40})
                     //We can set x data accessor to use index. Reason? So the bars all appear evenly spaced.
                     .x(function(d,i) {return i })
                     .y(function(d,i) {return d[1] })
@@ -1360,9 +1358,9 @@ switchOsm.addTo(map);
                   .tickFormat(d3.format(',f'));
 
               // To deactivte onclick legend
-              /*for (var property in chart.legend.dispatch) {
+              for (var property in chart.legend.dispatch) {
                     chart.legend.dispatch[property] = function() { };
-                }*/
+                }
 
               d3.select('#chart_main svg')
                 .datum(data)
@@ -1431,6 +1429,26 @@ $("select#trends").change(
   };
 });
 
+$('input.range-slider').attr('data-step', '1');
+$('input.range-slider').attr('data-intro', "The timeline allows you to consult the data of particular week.<br />Moving the cursor will update the data on the map and also the pie charts on left side and the lists on the right side.");
+
+$('button.bswitchCW').attr('data-step', '2');
+$('button.bswitchCW').attr('data-intro', 'Click on this button to consult the cumulative data.<br />To go back to the weekly data, click again.');
+
+$('select.choice_disease').attr('data-step', '3');
+$('select.choice_disease').attr('data-intro', 'With this dropdown menu you can select a particular disease. By doing so, the data on the map will be update. By default, all the diseases are displayed');
+
+$("button.bswitch").attr('data-step', '4');
+$("button.bswitch").attr('data-intro', 'Switch to OpenStreetMap');
+
+$("button.btlegend").attr('data-step', '5');
+$("button.btlegend").attr('data-intro', 'Show or hide the legend');
+
+$("button.bzoom").attr('data-step', '6');
+$("button.bzoom").attr('data-intro', 'Full Extent');
+
+$("select#trends").attr('data-step', '7');
+$("select#trends").attr('data-intro', "You can select a particular variable. It will update the chart below");
 
 // close ready(function()
 });
