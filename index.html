@@ -86,9 +86,9 @@
         </div>
          <div id="map" class="col-md-7"></div>
          <div id="numbers" class="col-md-3">
-                 <h5 class="title_dis">Number of diseases</h5>
+                 <h5 class="title_dis"></h5>
                  <ul class="dis_list"></ul>
-                 <h5 class="title_alert">Number of alerts</h5>
+                 <h5 class="title_alert"></h5>
                  <ul class="alert_list"></ul>
             </div>
     </div>
@@ -766,12 +766,15 @@ function dis_alert_list(week) {
     var alert_week = document.getElementsByClassName("alert_list")[0];
     var i_dis = diseases[week - 1];
     var i_al = alerts[week - 1];
-    for(var i = 0; i < i_dis.length; i++) {
+    
+    $( ".title_alert" ).text("Number of alerts (" + i_al[i_al.length-1].t + ")")
+    for(var i = 0; i < i_dis.length-1; i++) {
         var li = document.createElement("li");
         li.innerHTML = '<span>' + i_dis[i].n + '</span>' + ' ' + i_dis[i].d;
         dis_week.appendChild(li);
     }
-    for(var i = 0; i < i_al.length; i++) {
+    $( ".title_dis" ).text("Number of diseases (" + i_dis[i_dis.length-1].t + ")")
+    for(var i = 0; i < i_al.length-1; i++) {
         var li = document.createElement("li");
         li.innerHTML = '<span>' + i_al[i].n + '</span>' + ' ' + i_al[i].d;
         alert_week.appendChild(li);
@@ -1070,7 +1073,8 @@ if ($this.text() == "See cumulative data") {
      donut_chart("code/data/donut_by_age.json", "cumul", timestamps[timestamps.length-1], 'donut2'); 
      donut_chart("code/data/donut_by_gender.json", "cumul", timestamps[timestamps.length-1], 'donut3'); 
 
-     dis_alert_list(timestamps.length + 1);     
+     // For the cumulative data I look at the last element of the diseases and alerts lists
+     dis_alert_list(timestamps.length + 1);    
 
      if ($("select.choice_disease").val() == "1") {
         $("output.temporal-legend").remove();
