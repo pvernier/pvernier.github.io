@@ -7,7 +7,9 @@
     <meta name="description" content="">
     <meta name="author" content="WHO, OMS">
     <title>WHO - IRAQ</title>
+
     <link href="code/src/bootstrap-3.3.4-dist/css/bootstrap.min.css" rel="stylesheet"> 
+    
     <link rel="stylesheet" href="code/src/leaflet/leaflet.css"/>
     <link rel="stylesheet" href="code/src/leaflet/leaflet.label.css" />
     <link rel="stylesheet" href="code/src/nvd3-master/build/nv.d3.min.css" />
@@ -98,7 +100,7 @@
             </div>
         </div>
         <div class="col-md-6">
-            <h3 id="chart_title">Trend of proportion of cases of ARI, Scabies and AD in <select id="trends"><option value="1">All camps</option><option value="2">IDP camps</option><option value="3">Refugee camps</option></select></h3>
+            <h3 id="chart_title">Trend of proportion of cases of LARI, UARI, Scabies and AD in <select id="trends"><option value="1">All camps</option><option value="2">IDP camps</option><option value="3">Refugee camps</option></select></h3>
                 <div id="chart_gtrend" style="height: 400px; margin: 0 auto;">
                     <svg></svg>
                 </div> 
@@ -279,7 +281,7 @@
 //
 // Function to display the cumulative data
 function show_cumulative(geojson_file) {
-
+    console.log(geojson_file);
     $("output.temporal-legend").remove();
     $("input.range-slider").remove();
     legend.removeFrom(map);
@@ -390,7 +392,11 @@ function show_cumulative(geojson_file) {
                 });*/
             marker.on('click', function (e) {
                     $("em").css( "display", "none" );
-                    var camp_chart = [{"color": "#2E9AFE", "values": [], "key": "AD"},  {"color": "#FA5858", "values": [], "key": "Skin"},  {"color": "#5FB404", "values": [], "key": "ARI"}]
+                    //var camp_chart = [{"color": "#2E9AFE", "values": [], "key": "AD"},  {"color": "#FA5858", "values": [], "key": "Skin"},  {"color": "#5FB404", "values": [], "key": "ARI"}]
+                    var camp_chart = [{"color": "#2E9AFE", "values": [], "key": "AD"},
+                                      {"color": "#FA5858", "values": [], "key": "Skin"},
+                                      {"color": "#5FB404", "values": [], "key": "LARI"},
+                                      {"color": "#FFBF00", "values": [], "key": "UARI"}]
                      
                         for (var i = cons_Ad.features.length - 1; i >= 0; i--) {
                             if (cons_Ad.features[i].properties.name === this.options.name) {
@@ -399,18 +405,21 @@ function show_cumulative(geojson_file) {
                                         if (cons_all.features[i].properties[attribute][0] != 0) {
                                             camp_chart[0].values.push([attribute, Math.round(cons_Ad.features[i].properties[attribute][0] / cons_all.features[i].properties[attribute][0] * 10000)/100]);
                                             camp_chart[1].values.push([attribute, Math.round(cons_Skin.features[i].properties[attribute][0] / cons_all.features[i].properties[attribute][0] * 10000)/100]);
-                                            camp_chart[2].values.push([attribute,Math.round((cons_Lrti.features[i].properties[attribute][0] + cons_Urti.features[i].properties[attribute][0]) / cons_all.features[i].properties[attribute][0] * 10000)/100]);
+                                            camp_chart[2].values.push([attribute, Math.round(cons_Lrti.features[i].properties[attribute][0] / cons_all.features[i].properties[attribute][0] * 10000)/100]);
+                                            camp_chart[3].values.push([attribute, Math.round(cons_Urti.features[i].properties[attribute][0] / cons_all.features[i].properties[attribute][0] * 10000)/100]);
+                                            /*camp_chart[2].values.push([attribute,Math.round((cons_Lrti.features[i].properties[attribute][0] + cons_Urti.features[i].properties[attribute][0]) / cons_all.features[i].properties[attribute][0] * 10000)/100]);*/
                                         }
                                         else {
                                             camp_chart[0].values.push([attribute, 0]);
                                             camp_chart[1].values.push([attribute, 0]);
                                             camp_chart[2].values.push([attribute, 0]);
+                                            camp_chart[3].values.push([attribute, 0]);
                                         }
                                     }
                                 };
                             };                      
                         };
-                        $( "h2#chart_title").text("Trend of proportion of cases of ARI, Scabies and AD in " + this.options.name);
+                        //$( "h2#chart_title").text("Trend of proportion of cases of LARI, UARI, Scabies and AD in " + this.options.name);
                         nv.addGraph(function() {
                             var chart = nv.models.lineChart()
                                           .x(function(d,i) {return i })
@@ -771,7 +780,7 @@ function dis_alert_list(week) {
         li.innerHTML = '<span>' + i_dis[i].n + '</span>' + ' ' + i_dis[i].d;
         dis_week.appendChild(li);
     }
-    $( ".title_dis" ).text("Number of diseases (" + i_dis[i_dis.length-1].t + ")")
+    $( ".title_dis" ).text("Total consultations (" + i_dis[i_dis.length-1].t + ")")
     for(var i = 0; i < i_al.length-1; i++) {
         var li = document.createElement("li");
         li.innerHTML = '<span>' + i_al[i].n + '</span>' + ' ' + i_al[i].d;
@@ -780,6 +789,7 @@ function dis_alert_list(week) {
 }
 
 function show_weekly(geojson_file) {
+    console.log(geojson_file);
     $("output.temporal-legend").remove();
     $("input.range-slider").remove();
     
@@ -810,7 +820,7 @@ dis_alert_list(timestamps[timestamps.length-1]);
 var dropdmenu = L.control({position: 'topright'});
 dropdmenu.onAdd = function (map) {
     var div = L.DomUtil.create('div', 'info dropdmenu');
-    div.innerHTML = '<select class="form-control choice_disease"><option value="1">All Diseases</option><option value="2">Malnutrition</option><option value="3">Acute Diarrhea</option><option value="4">Acute Flaccid Paralysis</option><option value="5">Acute Jaundice Syndrome</option><option value="6">Acute Watery Diarrhea</option><option value="7">Bloody Diarrhea</option><option value="8">Suspected Leishmaniasis</option><option value="9">Lower Acute Respiratory Infection</option><option value="10">Suspected Meningitis</option><option value="11">Others</option><option value="12">Skin Diseases</option><option value="13">Suspected Diphtheria</option><option value="14">Suspected Hemorrhagic Fever</option><option value="15">Suspected Measles</option><option value="16">Suspected Neonatal Tetanus</option><option value="17">Suspected Diphtheria</option><option value="18">Suspected Rabies</option><option value="19">Unexplained Fever</option><option value="20">Upper Acute Respiratory Infection</option></select>';
+    div.innerHTML = '<select class="form-control choice_disease"><option value="1">All Diseases</option><optgroup label="Respiratory Diseases"><option value="2">Upper Acute Respiratory Infection</option><option value="3">Lower Acute Respiratory Infection</option></optgroup><optgroup label="Water Borne Diseases"><option value="4">Acute Diarrhea</option><option value="5">Bloody Diarrhea</option><option value="6">Acute Watery Diarrhea</option><option value="7">Acute Jaundice Syndrome</option></optgroup><optgroup label="Vaccine Preventable Diseases"><option value="8">Acute Flaccid Paralysis</option><option value="9">Suspected Measles</option><option value="10">Suspected Meningitis</option><option value="11">Suspected Diphtheria</option><option value="12">Suspected Pertusis</option><option value="13">Suspected Neonatal Tetanus</option></optgroup><optgroup label="Other Communicable Diseases"><option value="14">Unexplained Fever</option><option value="15">Suspected Leishmaniasis</option><option value="16">Suspected Hemorrhagic Fever</option><option value="17">Skin Diseases</option><option value="18">Suspected Rabies</option><option value="19">Malnutrition</option></optgroup><option value="20">Others</option></select>';
     div.firstChild.onmousedown = div.firstChild.ondblclick = L.DomEvent.stopPropagation;
     return div;
 };
@@ -834,15 +844,26 @@ $("select.choice_disease").change(
     else if ($(this).val() == "2") {
         if ($("button.bswitchCW").text() ==="See cumulative data") {
             map.removeLayer(markers);
-            show_weekly('code/data/Acumal_per_week.geojson');
+            show_weekly('code/data/Urti_per_week.geojson');
         }
         else {
             $("output.temporal-legend").remove();
             $("input.range-slider").remove();
-            show_cumulative("code/data/Acumal_cumul.geojson");
+            show_cumulative("code/data/Urti_cumul.geojson");
         }
     }
     else if ($(this).val() == "3") {
+        if ($("button.bswitchCW").text() ==="See cumulative data") {
+            map.removeLayer(markers);
+            show_weekly('code/data/Lrti_per_week.geojson');
+        }
+        else {
+            $("output.temporal-legend").remove();
+            $("input.range-slider").remove();
+            show_cumulative("code/data/Lrti_cumul.geojson");
+        }     
+    } 
+    else if ($(this).val() == "4") {
         if ($("button.bswitchCW").text() ==="See cumulative data") {
             map.removeLayer(markers);
             show_weekly('code/data/Ad_per_week.geojson');
@@ -853,26 +874,15 @@ $("select.choice_disease").change(
             show_cumulative("code/data/Ad_cumul.geojson");
         }
     }
-    else if ($(this).val() == "4") {
-        if ($("button.bswitchCW").text() ==="See cumulative data") {
-            map.removeLayer(markers);
-            show_weekly('code/data/Afp_per_week.geojson');
-        }
-        else {
-            $("output.temporal-legend").remove();
-            $("input.range-slider").remove();
-            show_cumulative("code/data/Afp_cumul.geojson");
-        }
-    }
     else if ($(this).val() == "5") {
         if ($("button.bswitchCW").text() ==="See cumulative data") {
             map.removeLayer(markers);
-            show_weekly('code/data/Ajs_per_week.geojson');
+            show_weekly('code/data/Bd_per_week.geojson');
         }
         else {
             $("output.temporal-legend").remove();
             $("input.range-slider").remove();
-            show_cumulative("code/data/Ajs_cumul.geojson");
+            show_cumulative("code/data/Bd_cumul.geojson");
         }     
     }
     else if ($(this).val() == "6") {
@@ -889,34 +899,34 @@ $("select.choice_disease").change(
     else if ($(this).val() == "7") {
         if ($("button.bswitchCW").text() ==="See cumulative data") {
             map.removeLayer(markers);
-            show_weekly('code/data/Bd_per_week.geojson');
+            show_weekly('code/data/Ajs_per_week.geojson');
         }
         else {
             $("output.temporal-legend").remove();
             $("input.range-slider").remove();
-            show_cumulative("code/data/Bd_cumul.geojson");
+            show_cumulative("code/data/Ajs_cumul.geojson");
         }     
     }
     else if ($(this).val() == "8") {
         if ($("button.bswitchCW").text() ==="See cumulative data") {
             map.removeLayer(markers);
-            show_weekly('code/data/Lesh_per_week.geojson');
+            show_weekly('code/data/Afp_per_week.geojson');
         }
         else {
             $("output.temporal-legend").remove();
             $("input.range-slider").remove();
-            show_cumulative("code/data/Lesh_cumul.geojson");
-        }     
+            show_cumulative("code/data/Afp_cumul.geojson");
+        }
     }
     else if ($(this).val() == "9") {
         if ($("button.bswitchCW").text() ==="See cumulative data") {
             map.removeLayer(markers);
-            show_weekly('code/data/Lrti_per_week.geojson');
+            show_weekly('code/data/Susp_Ms_per_week.geojson');
         }
         else {
             $("output.temporal-legend").remove();
             $("input.range-slider").remove();
-            show_cumulative("code/data/Lrti_cumul.geojson");
+            show_cumulative("code/data/Susp_Ms_cumul.geojson");
         }     
     }
     else if ($(this).val() == "10") {
@@ -933,28 +943,6 @@ $("select.choice_disease").change(
     else if ($(this).val() == "11") {
         if ($("button.bswitchCW").text() ==="See cumulative data") {
             map.removeLayer(markers);
-            show_weekly('code/data/Oth_per_week.geojson');
-        }
-        else {
-            $("output.temporal-legend").remove();
-            $("input.range-slider").remove();
-            show_cumulative("code/data/Oth_cumul.geojson");
-        }     
-    }
-    else if ($(this).val() == "12") {
-        if ($("button.bswitchCW").text() ==="See cumulative data") {
-            map.removeLayer(markers);
-            show_weekly('code/data/Skin_per_week.geojson');
-        }
-        else {
-            $("output.temporal-legend").remove();
-            $("input.range-slider").remove();
-            show_cumulative("code/data/Skin_cumul.geojson");
-        }     
-    }
-    else if ($(this).val() == "13") {
-        if ($("button.bswitchCW").text() ==="See cumulative data") {
-            map.removeLayer(markers);
             show_weekly('code/data/Susp_Dip_per_week.geojson');
         }
         else {
@@ -963,29 +951,18 @@ $("select.choice_disease").change(
             show_cumulative("code/data/Susp_Dip_cumul.geojson");
         }     
     }
-    else if ($(this).val() == "14") {
+    else if ($(this).val() == "12") {
         if ($("button.bswitchCW").text() ==="See cumulative data") {
             map.removeLayer(markers);
-            show_weekly('code/data/Susp_Hf_per_week.geojson');
+            show_weekly('code/data/Susp_Pert_per_week.geojson');
         }
         else {
             $("output.temporal-legend").remove();
             $("input.range-slider").remove();
-            show_cumulative("code/data/Susp_Hf_cumul.geojson");
+            show_cumulative("code/data/Susp_Pert_cumul.geojson");
         }     
     }
-    else if ($(this).val() == "15") {
-        if ($("button.bswitchCW").text() ==="See cumulative data") {
-            map.removeLayer(markers);
-            show_weekly('code/data/Susp_Ms_per_week.geojson');
-        }
-        else {
-            $("output.temporal-legend").remove();
-            $("input.range-slider").remove();
-            show_cumulative("code/data/Susp_Ms_cumul.geojson");
-        }     
-    }
-    else if ($(this).val() == "16") {
+    else if ($(this).val() == "13") {
         if ($("button.bswitchCW").text() ==="See cumulative data") {
             map.removeLayer(markers);
             show_weekly('code/data/Susp_Nnt_per_week.geojson');
@@ -996,15 +973,48 @@ $("select.choice_disease").change(
             show_cumulative("code/data/Susp_Nnt_cumul.geojson");
         }     
     }
-    else if ($(this).val() == "17") {
+    else if ($(this).val() == "14") {
         if ($("button.bswitchCW").text() ==="See cumulative data") {
             map.removeLayer(markers);
-            show_weekly('code/data/Susp_Pert_per_week.geojson');
+            show_weekly('code/data/Unexp_Fever_per_week.geojson');
         }
         else {
             $("output.temporal-legend").remove();
             $("input.range-slider").remove();
-            show_cumulative("code/data/Susp_Pert_cumul.geojson");
+            show_cumulative("code/data/Unexp_Fever_cumul.geojson");
+        }     
+    }
+    else if ($(this).val() == "15") {
+        if ($("button.bswitchCW").text() ==="See cumulative data") {
+            map.removeLayer(markers);
+            show_weekly('code/data/Lesh_per_week.geojson');
+        }
+        else {
+            $("output.temporal-legend").remove();
+            $("input.range-slider").remove();
+            show_cumulative("code/data/Lesh_cumul.geojson");
+        }     
+    }
+    else if ($(this).val() == "16") {
+        if ($("button.bswitchCW").text() ==="See cumulative data") {
+            map.removeLayer(markers);
+            show_weekly('code/data/Susp_Hf_per_week.geojson');
+        }
+        else {
+            $("output.temporal-legend").remove();
+            $("input.range-slider").remove();
+            show_cumulative("code/data/Susp_Hf_cumul.geojson");
+        }     
+    }
+    else if ($(this).val() == "17") {
+        if ($("button.bswitchCW").text() ==="See cumulative data") {
+            map.removeLayer(markers);
+            show_weekly('code/data/Skin_per_week.geojson');
+        }
+        else {
+            $("output.temporal-legend").remove();
+            $("input.range-slider").remove();
+            show_cumulative("code/data/Skin_cumul.geojson");
         }     
     }
     else if ($(this).val() == "18") {
@@ -1021,26 +1031,26 @@ $("select.choice_disease").change(
     else if ($(this).val() == "19") {
         if ($("button.bswitchCW").text() ==="See cumulative data") {
             map.removeLayer(markers);
-            show_weekly('code/data/Unexp_Fever_per_week.geojson');
+            show_weekly('code/data/Acumal_per_week.geojson');
         }
         else {
             $("output.temporal-legend").remove();
             $("input.range-slider").remove();
-            show_cumulative("code/data/Unexp_Fever_cumul.geojson");
-        }     
+            show_cumulative("code/data/Acumal_cumul.geojson");
+        }
     }
-    // value = "20"
+    // ($(this).val() == "20")
     else {
         if ($("button.bswitchCW").text() ==="See cumulative data") {
             map.removeLayer(markers);
-            show_weekly('code/data/Urti_per_week.geojson');
+            show_weekly('code/data/Oth_per_week.geojson');
         }
         else {
             $("output.temporal-legend").remove();
             $("input.range-slider").remove();
-            show_cumulative("code/data/Urti_cumul.geojson");
-        }
-    }; 
+            show_cumulative("code/data/Oth_cumul.geojson");
+        }     
+    };    
 })
 // ----------------- End drop down -----------------
 
@@ -1082,22 +1092,22 @@ if ($this.text() == "See cumulative data") {
     else if ($("select.choice_disease").val() == "2") {
         $("output.temporal-legend").remove();
         $("input.range-slider").remove();
-        show_cumulative("code/data/Acumal_cumul.geojson");
+        show_cumulative("code/data/Urti_cumul.geojson");
     }
     else if ($("select.choice_disease").val() == "3") {
         $("output.temporal-legend").remove();
         $("input.range-slider").remove();
-        show_cumulative("code/data/Ad_cumul.geojson");
+        show_cumulative("code/data/Lrti_cumul.geojson");
     }
     else if ($("select.choice_disease").val() == "4") {
         $("output.temporal-legend").remove();
         $("input.range-slider").remove();
-        show_cumulative("code/data/Afp_cumul.geojson");
+        show_cumulative("code/data/Ad_cumul.geojson");
     }
     else if ($("select.choice_disease").val() == "5") {
         $("output.temporal-legend").remove();
         $("input.range-slider").remove();
-        show_cumulative("code/data/Ajs_cumul.geojson");
+        show_cumulative("code/data/Bd_cumul.geojson");
     }
     else if ($("select.choice_disease").val() == "6") {
         $("output.temporal-legend").remove();
@@ -1107,17 +1117,17 @@ if ($this.text() == "See cumulative data") {
     else if ($("select.choice_disease").val() == "7") {
         $("output.temporal-legend").remove();
         $("input.range-slider").remove();
-        show_cumulative("code/data/Bd_cumul.geojson");
+        show_cumulative("code/data/Ajs_cumul.geojson");
     }
     else if ($("select.choice_disease").val() == "8") {
         $("output.temporal-legend").remove();
         $("input.range-slider").remove();
-        show_cumulative("code/data/Lesh_cumul.geojson");
+        show_cumulative("code/data/Afp_cumul.geojson");
     }
     else if ($("select.choice_disease").val() == "9") {
         $("output.temporal-legend").remove();
         $("input.range-slider").remove();
-        show_cumulative("code/data/Lrti_cumul.geojson");
+        show_cumulative("code/data/Susp_Ms_cumul.geojson");
     }
     else if ($("select.choice_disease").val() == "10") {
         $("output.temporal-legend").remove();
@@ -1127,37 +1137,37 @@ if ($this.text() == "See cumulative data") {
     else if ($("select.choice_disease").val() == "11") {
         $("output.temporal-legend").remove();
         $("input.range-slider").remove();
-        show_cumulative("code/data/Oth_cumul.geojson");
+        show_cumulative("code/data/Susp_Dip_cumul.geojson");
     }
     else if ($("select.choice_disease").val() == "12") {
         $("output.temporal-legend").remove();
         $("input.range-slider").remove();
-        show_cumulative("code/data/Skin_cumul.geojson");
+        show_cumulative("code/data/Susp_Pert_cumul.geojson");
     }
     else if ($("select.choice_disease").val() == "13") {
         $("output.temporal-legend").remove();
         $("input.range-slider").remove();
-        show_cumulative("code/data/Susp_Dip_cumul.geojson");
+        show_cumulative("code/data/Susp_Nnt_cumul.geojson");
     }
     else if ($("select.choice_disease").val() == "14") {
         $("output.temporal-legend").remove();
         $("input.range-slider").remove();
-        show_cumulative("code/data/Susp_Hf_cumul.geojson");
+        show_cumulative("code/data/Unexp_Fever_cumul.geojson");
     }
     else if ($("select.choice_disease").val() == "15") {
         $("output.temporal-legend").remove();
         $("input.range-slider").remove();
-        show_cumulative("code/data/Susp_Ms_cumul.geojson");
+        show_cumulative("code/data/Lesh_cumul.geojson");
     }
     else if ($("select.choice_disease").val() == "16") {
         $("output.temporal-legend").remove();
         $("input.range-slider").remove();
-        show_cumulative("code/data/Susp_Nnt_cumul.geojson");
+        show_cumulative("code/data/Susp_Hf_cumul.geojson");
     }
     else if ($("select.choice_disease").val() == "17") {
         $("output.temporal-legend").remove();
         $("input.range-slider").remove();
-        show_cumulative("code/data/Susp_Pert_cumul.geojson");
+        show_cumulative("code/data/Skin_cumul.geojson");
     }
     else if ($("select.choice_disease").val() == "18") {
         $("output.temporal-legend").remove();
@@ -1167,14 +1177,14 @@ if ($this.text() == "See cumulative data") {
     else if ($("select.choice_disease").val() == "19") {
         $("output.temporal-legend").remove();
         $("input.range-slider").remove();
-        show_cumulative("code/data/Unexp_Fever_cumul.geojson");
+        show_cumulative("code/data/Acumal_cumul.geojson");
     }
     // = 20
     else  {
         $("output.temporal-legend").remove();
         $("input.range-slider").remove();
-        show_cumulative("code/data/Urti_cumul.geojson");
-    }
+        show_cumulative("code/data/Oth_cumul.geojson");
+    }   
 
 } 
 // To go back to the weekly data
@@ -1192,19 +1202,19 @@ else {
     }
     else if ($("select.choice_disease").val() == "2") {
         map.removeLayer(markers);
-        show_weekly('code/data/Acumal_per_week.geojson');
+        show_weekly('code/data/Urti_per_week.geojson');
     }
     else if ($("select.choice_disease").val() == "3") {
         map.removeLayer(markers);
-        show_weekly('code/data/Ad_per_week.geojson');
+        show_weekly('code/data/Lrti_per_week.geojson');
     }
     else if ($("select.choice_disease").val() == "4") {
         map.removeLayer(markers);
-        show_weekly('code/data/Afp_per_week.geojson');
+        show_weekly('code/data/Ad_per_week.geojson');
     }
     else if ($("select.choice_disease").val() == "5") {
         map.removeLayer(markers);
-        show_weekly('code/data/Ajs_per_week.geojson');
+        show_weekly('code/data/Bd_per_week.geojson');
     }
     else if ($("select.choice_disease").val() == "6") {
         map.removeLayer(markers);
@@ -1212,15 +1222,15 @@ else {
     }
     else if ($("select.choice_disease").val() == "7") {
         map.removeLayer(markers);
-        show_weekly('code/data/Bd_per_week.geojson');
+        show_weekly('code/data/Ajs_per_week.geojson');
     }
     else if ($("select.choice_disease").val() == "8") {
         map.removeLayer(markers);
-        show_weekly('code/data/Lesh_per_week.geojson');
+        show_weekly('code/data/Afp_per_week.geojson');
     }
     else if ($("select.choice_disease").val() == "9") {
         map.removeLayer(markers);
-        show_weekly('code/data/Lrti_per_week.geojson');
+        show_weekly('code/data/Susp_Ms_per_week.geojson');
     }
     else if ($("select.choice_disease").val() == "10") {
         map.removeLayer(markers);
@@ -1228,31 +1238,31 @@ else {
     }
     else if ($("select.choice_disease").val() == "11") {
         map.removeLayer(markers);
-        show_weekly('code/data/Oth_per_week.geojson');;
+        show_weekly('code/data/Susp_Dip_per_week.geojson');
     }
     else if ($("select.choice_disease").val() == "12") {
         map.removeLayer(markers);
-        show_weekly('code/data/Skin_per_week.geojson');
+        show_weekly('code/data/Susp_Pert_per_week.geojson');
     }
     else if ($("select.choice_disease").val() == "13") {
         map.removeLayer(markers);
-        show_weekly('code/data/Susp_Dip_per_week.geojson');
+        show_weekly('code/data/Susp_Nnt_per_week.geojson');
     }
     else if ($("select.choice_disease").val() == "14") {
         map.removeLayer(markers);
-        show_weekly('code/data/Susp_Hf_per_week.geojson');
+        show_weekly('code/data/Unexp_Fever_per_week.geojson');
     }
     else if ($("select.choice_disease").val() == "15") {
         map.removeLayer(markers);
-        show_weekly('code/data/Susp_Ms_per_week.geojson');
+        show_weekly('code/data/Lesh_per_week.geojson');
     }
     else if ($("select.choice_disease").val() == "16") {
         map.removeLayer(markers);
-        show_weekly('code/data/Susp_Nnt_per_week.geojson');
+        show_weekly('code/data/Susp_Hf_per_week.geojson');
     }
     else if ($("select.choice_disease").val() == "17") {
         map.removeLayer(markers);
-        show_weekly('code/data/Susp_Pert_per_week.geojson');
+        show_weekly('code/data/Skin_per_week.geojson');
     }
     else if ($("select.choice_disease").val() == "18") {
         map.removeLayer(markers);
@@ -1260,13 +1270,13 @@ else {
     }
     else if ($("select.choice_disease").val() == "19") {
         map.removeLayer(markers);
-        show_weekly('code/data/Unexp_Fever_per_week.geojson');
+        show_weekly('code/data/Acumal_per_week.geojson');
     }
     // = 20
     else {
         map.removeLayer(markers);
-        show_weekly('code/data/Urti_per_week.geojson');
-    }
+        show_weekly('code/data/Oth_per_week.geojson');;
+    }    
 };
 });
 return buttonswitchCW;
