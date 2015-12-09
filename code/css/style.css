@@ -27,18 +27,24 @@ h6 {
 
 ul
 {
+    
+}
+
+ul.dis_list {
     list-style-type: none;
     font-weight: bold;
     font-size : 11px;
     position:relative;
     right: 30px;
-}
-
-ul.dis_list {
     color: #2171b5;
 }
 
 ul.alert_list {
+    list-style-type: none;
+    font-weight: bold;
+    font-size : 11px;
+    position:relative;
+    right: 30px;
     color: #ef3b2c;
 }
 
@@ -66,15 +72,7 @@ a#miseAjour {
     height: 20px;
     padding: 0 0;
 }
-div, span {
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    /*border: 1px solid black;*/
-}
+
 #map {
     height: 500px;
     /*width: 75%;
@@ -248,3 +246,19 @@ select#trends {
 /*#chart_main, #chart_gtrend {
     border: 1px solid black;
 }*/
+
+/*Page  Case Definition*/
+
+td.cd_cat {
+    text-align: center;
+    font-weight: bold;
+    background: #E6E6E6;
+}
+
+td:first-child {  
+  font-weight: bold;
+}
+
+a#dlcd_pdf {
+    float: right;    
+}

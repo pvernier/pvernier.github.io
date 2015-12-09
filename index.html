@@ -49,10 +49,10 @@
           <a class="navbar-brand" href="index.html">WHO - IRAQ - EWARN</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
-          <!-- <ul class="nav navbar-nav">
-            <li><a href="index.html"><span class="glyphicon glyphicon glyphicon-globe" aria-hidden="true"></span>  Maps</a></li>
-            <li><a href="charts.html"><span class="glyphicon glyphicon glyphicon-signal" aria-hidden="true"></span>  Charts</a></li>
-          </ul> -->
+          <ul class="nav navbar-nav">
+            <li><a href="case_definition.html"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>  Case Definition</a></li>
+            <li><a href="ressources.html">Other Ressources</a></li>
+          </ul>
         </div>
       </div>
     </nav>
@@ -791,7 +791,7 @@ function show_weekly(geojson_file) {
     $.getJSON(geojson_file, function(data) {
         extractDistrib(data);
         // When I load a layer (disease) I show the last week
-        updatePropSymbols(data, timestamps.length-1);   
+        updatePropSymbols(data, timestamps.length);   
         createSliderUI(data, timestamps); 
         add_legend();
 
