@@ -25,11 +25,6 @@ h6 {
     text-align: center;
 }
 
-ul
-{
-    
-}
-
 ul.dis_list {
     list-style-type: none;
     font-weight: bold;
@@ -53,7 +48,7 @@ ul span {
     text-align: right;
  }
 
- h3 {
+h3 {
     text-align: center;
  }
 
@@ -73,48 +68,72 @@ a#miseAjour {
     padding: 0 0;
 }
 
+div#row2 {
+	height: 70px;
+    /*padding-top: 2px;
+    padding-bottom: 5px;*/
+	/*border: 1px solid black;*/
+}
+
+output.temporal-legend {
+	/*border: 1px solid black;*/
+	text-align: center;
+    color: #DF013A;
+	font-size : 20px;
+	font-weight: bold;
+	padding-top: 30px;
+}
+
+div#timeline {
+	padding: 0;
+}
+
+div#englob1 {
+    /*height: 30px;*/
+    margin-top: 40px;
+    width: 85%;
+    float:left;
+    /*border: 1px solid red;*/
+}
+
+input[type=range] {
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+div#englob2 {
+    width: 14%;
+    float:right;
+    /*border: 1px solid black;*/
+    padding-top: 40px;
+}
+
 #map {
     height: 500px;
-    /*width: 75%;
-    margin: 0 auto;
-    border: 1px solid black;*/
 }
+
 div.panel {
     width: 65%;
     margin: 0 auto;
 }
 
-/* drop down menu */
-select.choice_disease {
-    width:80%;
-    height: 25px;
-    font-size : 11px;
-    position:relative;
-    top: 20px;
-    left: 45px;
+/* Bouton swith to cumulative */
+button.bswitchCW {
+    font-size: 12px;
+    font-weight: bold;
+    height: 20px;
+    padding-top: 1px;
+    padding-bottom: 2px;
 }
-
 
 /* Bouton zoom initial */
 button.bzoom {
     width: 25px;
     height: 25px;
-    position:relative;
+    /*position:relative;
     top: 15px;
-    left: 1px;
-    padding: 0 0;
-    
-}
-/* Bouton swith to cumulative */
-button.bswitchCW {
-    /*width: 30px;*/
-    font-size: 12px;
-    font-weight: bold;
-    height: 20px;
-    position: relative;
-    bottom: 75px;
-    padding-top: 1px;
-    padding-bottom: 2px;
+    left: 1px;*/
+    padding: 0 0;  
 }
 
 /* Button show/hide legend */
@@ -122,36 +141,37 @@ button.btlegend {
     width: 25px;
     height: 25px;
     position:relative;
-    bottom: 50px;
-    right: 25px;
-    padding: 0 0;;
+    bottom: 35px;
+    right: 27px;
+    padding: 0 0;
 }
-
 /* Button switch to OSM */
 button.bswitch {
     width: 25px;
     height: 25px;
     position: relative;
-    top: -85px;
-    right: 51px;
-    padding: 0 0;;
+    top: -70px;
+    right: 55px;
+    padding: 0 0;
+}
+
+/* drop down menu */
+select.choice_disease {
+    width:80%;
+    height: 25px;
+    font-size : 11px;
+    position: relative;
+    bottom: 75px;
+    left: 46px;
 }
 
 /* Labels for other countries */
-em {    font-size : 12px; 
-        font-weight : bold; 
-        color: black; 
-        font-style: normal;
+em {    
+    font-size : 12px; 
+    font-weight : bold; 
+    color: black; 
+    font-style: normal;
     }
-
-.temporal-legend {
-    padding: 6px 10px;
-    /*font: 14px/16px Arial, Helvetica, sans-serif;*/
-    background: white;
-    background: rgba(255,255,255,0.8);
-    box-shadow: 0 0 15px rgba(0,0,0,0.2);
-    border-radius: 5px;
-}
 
 .legend {
     padding: 6px 8px;
@@ -165,7 +185,6 @@ em {    font-size : 12px;
     text-align: left;  
     display: none;
 }
-
 
 .legend i {
     width: 18px;
@@ -189,8 +208,6 @@ span#text_cluster {
     font-weight: bold;
     font-size: 12px;
 }
-
-
 
 i#legend_indiv_rs {
     width: 16px;
@@ -218,7 +235,6 @@ i#legend_cluster2_rs {
     left: 5px;
     top: 5px;
     border: 1px solid #D8D8D8;
-
 }
 
 div.leaflet-control-attribution {
@@ -230,6 +246,10 @@ select#trends {
     position:relative;
     bottom: 5px;
 }
+
+/*START input range*/
+
+/*END input range*/
 
 /*div.donut {
     border: 1px solid black;

@@ -67,6 +67,19 @@
         </div>
         
     </div>
+    <div id="row2" class="row">
+        <div  class="col-md-2"><output class="temporal-legend"></output></div>
+         <div id="timeline" class="col-md-7">
+             
+             <div id="englob1">
+                <input class="range-slider" step="1" min="1" type="range">
+             </div>
+             <div id="englob2">
+                <button data-intro="Click on this button to consult the cumulative data.<br />To go back to the weekly data, click again." data-step="2" class="bswitchCW btn btn-default">See cumulative data</button>
+             </div>
+         </div>
+         <div class="col-md-3"></div>
+    </div>
     <div class="row">
         <div id="text" class="col-md-2">
             <div id="donuts">
@@ -110,6 +123,7 @@
 <script>
  $(document).ready(function() {
      // timestamps will contain the week numbers
+     var current_week;
      var timestamps = []; 
      var map = L.map('map', { 
             center: [33.3, 43.5], 
@@ -117,20 +131,6 @@
             minZoom: 6,
             maxZoom: 18  
         });
-
-    var cons_Ad = (function () {
-        var json = null;
-        $.ajax({
-            'async': false,
-            'global': false,
-            'url': 'code/data/Ad_per_week.geojson',
-            'dataType': "json",
-            'success': function (data) {
-                json = data;
-            }
-        });
-        return json;
-    })(); 
 
     var cons_all = (function () {
         var json = null;
@@ -159,6 +159,21 @@
         });
         return json;
     })(); 
+
+    var cons_Ad = (function () {
+        var json = null;
+        $.ajax({
+            'async': false,
+            'global': false,
+            'url': 'code/data/Ad_per_week.geojson',
+            'dataType': "json",
+            'success': function (data) {
+                json = data;
+            }
+        });
+        return json;
+    })(); 
+
 
     var cons_Skin = (function () {
         var json = null;
@@ -281,9 +296,8 @@
 //
 // Function to display the cumulative data
 function show_cumulative(geojson_file) {
-    console.log(geojson_file);
-    $("output.temporal-legend").remove();
-    $("input.range-slider").remove();
+    $("output.temporal-legend").text("CUMULATIVE DATA");
+    $("input.range-slider").hide();
     legend.removeFrom(map);
     map.removeLayer(markers);
     markers = L.markerClusterGroup({
@@ -593,63 +607,6 @@ function updatePropSymbols(data, timestamp) {
         map.addLayer(markers);
     };
 }
- 
-
-function createSliderUI(data, timestamps) {
-    var sliderControl = L.control({ position: 'bottomleft'} );
-
-    sliderControl.onAdd = function(map) {
-
-        var slider = L.DomUtil.create("input", "range-slider");
-
-        L.DomEvent.addListener(slider, 'mousedown', function(e) { 
-
-            L.DomEvent.stopPropagation(e); 
-        });
-        $(slider)
-        .attr({'type':'range', 'max': timestamps[timestamps.length-1], 'min':timestamps[0], 'step': 1,'value': timestamps[timestamps.length-1]}).on('input change', function() {
-
-            map.removeLayer(markers);
-            updatePropSymbols(data, $(this).val().toString());
-            donut_chart("code/data/donut_by_ari.json", "weekly", $(this).val(), 'donut1');
-            donut_chart("code/data/donut_by_age.json", "weekly", $(this).val(), 'donut2');
-            donut_chart("code/data/donut_by_gender.json", "weekly", $(this).val(), 'donut3');
-            
-            dis_alert_list($(this).val());
-
-            $('output.temporal-legend').removeAttr('id');
-            $(".temporal-legend").text('Week ' + this.value);
-            if (this.value <= 53) {
-                $(".temporal-legend").text('Week ' + this.value + ' 2015');
-                semaine_map = this.value + '_2014';
-            }   
-            else{
-                $(".temporal-legend").text('Semaine ' + String(this.value - 53) + ' de 2015');
-                semaine_map = String(this.value - 53) + '_2015';
-            };
-        });
-        return slider;
-    }
-    sliderControl.addTo(map);
-    createTemporalLegend(timestamps[timestamps.length-1]);
-}
-
-function createTemporalLegend(startTimestamp, step) {
-    var temporalLegend = L.control({ position: 'bottomleft' });  
-    temporalLegend.onAdd = function(map) {  
-        var output = L.DomUtil.create("output", "temporal-legend");
-        return output;  
-    }
-    temporalLegend.addTo(map);  
-    if (startTimestamp <= 53) {
-        $(".temporal-legend").text('Week ' + startTimestamp + ' 2015');
-        semaine_map = startTimestamp + '_2014';
-    }
-    else{
-    $(".temporal-legend").text('Semaine ' + String(startTimestamp - 53) + ' de 2015'); 
-    semaine_map = String(startTimestamp - 53) + '_2015';
-    };
-}
 
 function add_legend() {
     legend = L.control({position: 'bottomright'});
@@ -787,12 +744,22 @@ function dis_alert_list(week) {
         alert_week.appendChild(li);
     }
 }
+function createSliderUI(data) {
+    $("input.range-slider").show();
+    $('input').on('input change', function() {
+        current_week = $(this).val();
+        map.removeLayer(markers);
+        updatePropSymbols(data, current_week .toString());
+        donut_chart("code/data/donut_by_ari.json", "weekly", current_week , 'donut1');
+        donut_chart("code/data/donut_by_age.json", "weekly", current_week , 'donut2');
+        donut_chart("code/data/donut_by_gender.json", "weekly", current_week , 'donut3');
+        
+        dis_alert_list(current_week);
+        $("output").text('WEEK ' + current_week.toString() + ' 2015');
+    });
+}
 
 function show_weekly(geojson_file) {
-    console.log(geojson_file);
-    $("output.temporal-legend").remove();
-    $("input.range-slider").remove();
-    
     try {
         legend.removeFrom(map);
     }
@@ -802,21 +769,82 @@ function show_weekly(geojson_file) {
         extractDistrib(data);
         // When I load a layer (disease) I show the last week
         updatePropSymbols(data, timestamps.length);   
-        createSliderUI(data, timestamps); 
+        //createSliderUI(data, timestamps); 
+        createSliderUI(data); 
         add_legend();
 
     });
 }
-
+current_week = timestamps[timestamps.length-1]
+$("input.range-slider").attr({'max': current_week, 'value': current_week})
+// By default I load the last week
+$("output").text('WEEK ' + current_week.toString() + ' 2015');
 // By default on the map I load all the diseases
 show_weekly('code/data/all_per_week.geojson')
 // By default I load on the donuts, the data for the last week
-donut_chart("code/data/donut_by_ari.json", "weekly", timestamps[timestamps.length-1], 'donut1');
-donut_chart("code/data/donut_by_age.json", "weekly", timestamps[timestamps.length-1], 'donut2');
-donut_chart("code/data/donut_by_gender.json", "weekly", timestamps[timestamps.length-1], 'donut3');
+donut_chart("code/data/donut_by_ari.json", "weekly", current_week, 'donut1');
+donut_chart("code/data/donut_by_age.json", "weekly", current_week, 'donut2');
+donut_chart("code/data/donut_by_gender.json", "weekly", current_week, 'donut3');
 
-dis_alert_list(timestamps[timestamps.length-1]);
-    
+dis_alert_list(current_week);
+  
+
+var fullZoom = L.control( { position: 'topright' } );
+fullZoom.onAdd = function(map) {
+var buttonZoom = L.DomUtil.create("button", "bzoom btn btn-default");
+$(buttonZoom).append( '<span class="glyphicon glyphicon glyphicon-globe" aria-hidden="true"></span>');
+
+  L.DomEvent.addListener(buttonZoom, 'click', function(e) { 
+      map.setView([33.3, 43.5], 6);
+  });
+  return buttonZoom;
+};
+fullZoom.addTo(map); 
+
+var sh_legend = L.control( { position: 'topright' } );
+sh_legend.onAdd = function(map) {
+var buttonLegend = L.DomUtil.create("button", "btlegend btn btn-default");
+$(buttonLegend).append( '<span class="glyphicon glyphicon glyphicon-list-alt" aria-hidden="true"></span>');
+
+  L.DomEvent.addListener(buttonLegend, 'click', function(e) { 
+    if ($("div.legend").is(":visible")) {
+        $("div.legend").hide();
+    }
+    else{
+        $("div.legend").show();
+    };
+      
+  });
+  return buttonLegend;
+};
+sh_legend.addTo(map); 
+
+var switchOsm = L.control( { position: 'topright' } );
+switchOsm.onAdd = function(map) {
+var buttonSwitch = L.DomUtil.create("button", "bswitch btn btn-default");
+//$(buttonSwitch).text("OpenStreetMap");
+$(buttonSwitch).append( '<span class=" glyphicon glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>');
+  L.DomEvent.addListener(buttonSwitch, 'click', function(e) { 
+
+    if (map.hasLayer(OpenStreetMap_HOT) == true) {
+        map.removeLayer(OpenStreetMap_HOT);
+        map.addLayer(baseLayers);
+        
+        hprovs.bringToBack();
+        hdists.bringToBack();
+        countries.bringToBack();            
+        $("em").show();
+    }
+    else{
+        map.addLayer(OpenStreetMap_HOT);
+        $("em").hide();
+        map.removeLayer(baseLayers);
+    };
+  });
+  return buttonSwitch;
+};
+switchOsm.addTo(map); 
+
 var dropdmenu = L.control({position: 'topright'});
 dropdmenu.onAdd = function (map) {
     var div = L.DomUtil.create('div', 'info dropdmenu');
@@ -836,8 +864,7 @@ $("select.choice_disease").change(
             show_weekly('code/data/all_per_week.geojson');
         }
         else {
-            $("output.temporal-legend").remove();
-            $("input.range-slider").remove();
+            $("input.range-slider").hide();
             show_cumulative("code/data/all_cumul.geojson");
         }
     }
@@ -847,8 +874,7 @@ $("select.choice_disease").change(
             show_weekly('code/data/Urti_per_week.geojson');
         }
         else {
-            $("output.temporal-legend").remove();
-            $("input.range-slider").remove();
+            $("input.range-slider").hide();
             show_cumulative("code/data/Urti_cumul.geojson");
         }
     }
@@ -858,8 +884,7 @@ $("select.choice_disease").change(
             show_weekly('code/data/Lrti_per_week.geojson');
         }
         else {
-            $("output.temporal-legend").remove();
-            $("input.range-slider").remove();
+            $("input.range-slider").hide();
             show_cumulative("code/data/Lrti_cumul.geojson");
         }     
     } 
@@ -869,8 +894,7 @@ $("select.choice_disease").change(
             show_weekly('code/data/Ad_per_week.geojson');
         }
         else {
-            $("output.temporal-legend").remove();
-            $("input.range-slider").remove();
+            $("input.range-slider").hide();
             show_cumulative("code/data/Ad_cumul.geojson");
         }
     }
@@ -880,8 +904,7 @@ $("select.choice_disease").change(
             show_weekly('code/data/Bd_per_week.geojson');
         }
         else {
-            $("output.temporal-legend").remove();
-            $("input.range-slider").remove();
+            $("input.range-slider").hide();
             show_cumulative("code/data/Bd_cumul.geojson");
         }     
     }
@@ -891,8 +914,7 @@ $("select.choice_disease").change(
             show_weekly('code/data/Awd_per_week.geojson');
         }
         else {
-            $("output.temporal-legend").remove();
-            $("input.range-slider").remove();
+            $("input.range-slider").hide();
             show_cumulative("code/data/Awd_cumul.geojson");
         }     
     }
@@ -902,8 +924,7 @@ $("select.choice_disease").change(
             show_weekly('code/data/Ajs_per_week.geojson');
         }
         else {
-            $("output.temporal-legend").remove();
-            $("input.range-slider").remove();
+            $("input.range-slider").hide();
             show_cumulative("code/data/Ajs_cumul.geojson");
         }     
     }
@@ -913,8 +934,7 @@ $("select.choice_disease").change(
             show_weekly('code/data/Afp_per_week.geojson');
         }
         else {
-            $("output.temporal-legend").remove();
-            $("input.range-slider").remove();
+            $("input.range-slider").hide();
             show_cumulative("code/data/Afp_cumul.geojson");
         }
     }
@@ -924,8 +944,7 @@ $("select.choice_disease").change(
             show_weekly('code/data/Susp_Ms_per_week.geojson');
         }
         else {
-            $("output.temporal-legend").remove();
-            $("input.range-slider").remove();
+            $("input.range-slider").hide();
             show_cumulative("code/data/Susp_Ms_cumul.geojson");
         }     
     }
@@ -935,8 +954,7 @@ $("select.choice_disease").change(
             show_weekly('code/data/Mg_per_week.geojson');
         }
         else {
-            $("output.temporal-legend").remove();
-            $("input.range-slider").remove();
+            $("input.range-slider").hide();
             show_cumulative("code/data/Mg_cumul.geojson");
         }     
     }
@@ -946,8 +964,7 @@ $("select.choice_disease").change(
             show_weekly('code/data/Susp_Dip_per_week.geojson');
         }
         else {
-            $("output.temporal-legend").remove();
-            $("input.range-slider").remove();
+            $("input.range-slider").hide();
             show_cumulative("code/data/Susp_Dip_cumul.geojson");
         }     
     }
@@ -957,8 +974,7 @@ $("select.choice_disease").change(
             show_weekly('code/data/Susp_Pert_per_week.geojson');
         }
         else {
-            $("output.temporal-legend").remove();
-            $("input.range-slider").remove();
+            $("input.range-slider").hide();
             show_cumulative("code/data/Susp_Pert_cumul.geojson");
         }     
     }
@@ -968,8 +984,7 @@ $("select.choice_disease").change(
             show_weekly('code/data/Susp_Nnt_per_week.geojson');
         }
         else {
-            $("output.temporal-legend").remove();
-            $("input.range-slider").remove();
+            $("input.range-slider").hide();
             show_cumulative("code/data/Susp_Nnt_cumul.geojson");
         }     
     }
@@ -979,8 +994,7 @@ $("select.choice_disease").change(
             show_weekly('code/data/Unexp_Fever_per_week.geojson');
         }
         else {
-            $("output.temporal-legend").remove();
-            $("input.range-slider").remove();
+            $("input.range-slider").hide();
             show_cumulative("code/data/Unexp_Fever_cumul.geojson");
         }     
     }
@@ -990,8 +1004,7 @@ $("select.choice_disease").change(
             show_weekly('code/data/Lesh_per_week.geojson');
         }
         else {
-            $("output.temporal-legend").remove();
-            $("input.range-slider").remove();
+            $("input.range-slider").hide();
             show_cumulative("code/data/Lesh_cumul.geojson");
         }     
     }
@@ -1001,8 +1014,7 @@ $("select.choice_disease").change(
             show_weekly('code/data/Susp_Hf_per_week.geojson');
         }
         else {
-            $("output.temporal-legend").remove();
-            $("input.range-slider").remove();
+            $("input.range-slider").hide();
             show_cumulative("code/data/Susp_Hf_cumul.geojson");
         }     
     }
@@ -1012,8 +1024,7 @@ $("select.choice_disease").change(
             show_weekly('code/data/Skin_per_week.geojson');
         }
         else {
-            $("output.temporal-legend").remove();
-            $("input.range-slider").remove();
+            $("input.range-slider").hide();
             show_cumulative("code/data/Skin_cumul.geojson");
         }     
     }
@@ -1023,8 +1034,7 @@ $("select.choice_disease").change(
             show_weekly('code/data/Susp_Rabies_per_week.geojson');
         }
         else {
-            $("output.temporal-legend").remove();
-            $("input.range-slider").remove();
+            $("input.range-slider").hide();
             show_cumulative("code/data/Susp_Rabies_cumul.geojson");
         }     
     }
@@ -1034,8 +1044,7 @@ $("select.choice_disease").change(
             show_weekly('code/data/Acumal_per_week.geojson');
         }
         else {
-            $("output.temporal-legend").remove();
-            $("input.range-slider").remove();
+            $("input.range-slider").hide();
             show_cumulative("code/data/Acumal_cumul.geojson");
         }
     }
@@ -1046,8 +1055,7 @@ $("select.choice_disease").change(
             show_weekly('code/data/Oth_per_week.geojson');
         }
         else {
-            $("output.temporal-legend").remove();
-            $("input.range-slider").remove();
+            $("input.range-slider").hide();
             show_cumulative("code/data/Oth_cumul.geojson");
         }     
     };    
@@ -1056,27 +1064,11 @@ $("select.choice_disease").change(
 
 
 
-var fullZoom = L.control( { position: 'topright' } );
-fullZoom.onAdd = function(map) {
-var buttonZoom = L.DomUtil.create("button", "bzoom btn btn-default");
-$(buttonZoom).append( '<span class="glyphicon glyphicon glyphicon-globe" aria-hidden="true"></span>');
 
-  L.DomEvent.addListener(buttonZoom, 'click', function(e) { 
-      map.setView([33.3, 43.5], 6);
-  });
-  return buttonZoom;
-};
-fullZoom.addTo(map); 
 
-var switchCW = L.control( { position: 'topright'} );
-switchCW.onAdd = function(map) {
-var buttonswitchCW = L.DomUtil.create("button", "bswitchCW btn btn-default");
-$(buttonswitchCW).text("See cumulative data");
-L.DomEvent.addListener(buttonswitchCW, 'click', function(e) { 
-var $this = $(this);
-// To display the cumulative data
-if ($this.text() == "See cumulative data") {
-     $this.text('Back to weekly data');
+$( "button.bswitchCW" ).click(function() {
+if ($(this).text() == "See cumulative data") {
+     $(this).text('Back to weekly data');
      donut_chart("code/data/donut_by_ari.json", "cumul", timestamps[timestamps.length-1], 'donut1'); 
      donut_chart("code/data/donut_by_age.json", "cumul", timestamps[timestamps.length-1], 'donut2'); 
      donut_chart("code/data/donut_by_gender.json", "cumul", timestamps[timestamps.length-1], 'donut3'); 
@@ -1085,116 +1077,77 @@ if ($this.text() == "See cumulative data") {
      dis_alert_list(timestamps.length + 1);    
 
      if ($("select.choice_disease").val() == "1") {
-        $("output.temporal-legend").remove();
-        $("input.range-slider").remove();
         show_cumulative("code/data/all_cumul.geojson");
     }
     else if ($("select.choice_disease").val() == "2") {
-        $("output.temporal-legend").remove();
-        $("input.range-slider").remove();
         show_cumulative("code/data/Urti_cumul.geojson");
     }
     else if ($("select.choice_disease").val() == "3") {
-        $("output.temporal-legend").remove();
-        $("input.range-slider").remove();
         show_cumulative("code/data/Lrti_cumul.geojson");
     }
     else if ($("select.choice_disease").val() == "4") {
-        $("output.temporal-legend").remove();
-        $("input.range-slider").remove();
         show_cumulative("code/data/Ad_cumul.geojson");
     }
     else if ($("select.choice_disease").val() == "5") {
-        $("output.temporal-legend").remove();
-        $("input.range-slider").remove();
         show_cumulative("code/data/Bd_cumul.geojson");
     }
     else if ($("select.choice_disease").val() == "6") {
-        $("output.temporal-legend").remove();
-        $("input.range-slider").remove();
         show_cumulative("code/data/Awd_cumul.geojson");
     }
     else if ($("select.choice_disease").val() == "7") {
-        $("output.temporal-legend").remove();
-        $("input.range-slider").remove();
         show_cumulative("code/data/Ajs_cumul.geojson");
     }
     else if ($("select.choice_disease").val() == "8") {
-        $("output.temporal-legend").remove();
-        $("input.range-slider").remove();
         show_cumulative("code/data/Afp_cumul.geojson");
     }
     else if ($("select.choice_disease").val() == "9") {
-        $("output.temporal-legend").remove();
-        $("input.range-slider").remove();
         show_cumulative("code/data/Susp_Ms_cumul.geojson");
     }
     else if ($("select.choice_disease").val() == "10") {
-        $("output.temporal-legend").remove();
-        $("input.range-slider").remove();
         show_cumulative("code/data/Mg_cumul.geojson");
     }
     else if ($("select.choice_disease").val() == "11") {
-        $("output.temporal-legend").remove();
-        $("input.range-slider").remove();
         show_cumulative("code/data/Susp_Dip_cumul.geojson");
     }
     else if ($("select.choice_disease").val() == "12") {
-        $("output.temporal-legend").remove();
-        $("input.range-slider").remove();
         show_cumulative("code/data/Susp_Pert_cumul.geojson");
     }
     else if ($("select.choice_disease").val() == "13") {
-        $("output.temporal-legend").remove();
-        $("input.range-slider").remove();
         show_cumulative("code/data/Susp_Nnt_cumul.geojson");
     }
     else if ($("select.choice_disease").val() == "14") {
-        $("output.temporal-legend").remove();
-        $("input.range-slider").remove();
         show_cumulative("code/data/Unexp_Fever_cumul.geojson");
     }
     else if ($("select.choice_disease").val() == "15") {
-        $("output.temporal-legend").remove();
-        $("input.range-slider").remove();
         show_cumulative("code/data/Lesh_cumul.geojson");
     }
     else if ($("select.choice_disease").val() == "16") {
-        $("output.temporal-legend").remove();
-        $("input.range-slider").remove();
         show_cumulative("code/data/Susp_Hf_cumul.geojson");
     }
     else if ($("select.choice_disease").val() == "17") {
-        $("output.temporal-legend").remove();
-        $("input.range-slider").remove();
         show_cumulative("code/data/Skin_cumul.geojson");
     }
     else if ($("select.choice_disease").val() == "18") {
-        $("output.temporal-legend").remove();
-        $("input.range-slider").remove();
         show_cumulative("code/data/Susp_Rabies_cumul.geojson");
     }
     else if ($("select.choice_disease").val() == "19") {
-        $("output.temporal-legend").remove();
-        $("input.range-slider").remove();
         show_cumulative("code/data/Acumal_cumul.geojson");
     }
     // = 20
     else  {
-        $("output.temporal-legend").remove();
-        $("input.range-slider").remove();
         show_cumulative("code/data/Oth_cumul.geojson");
     }   
 
 } 
 // To go back to the weekly data
 else {
-     $this.text("See cumulative data");
-     donut_chart("code/data/donut_by_ari.json", "weekly", timestamps[timestamps.length-1], 'donut1');
-     donut_chart("code/data/donut_by_age.json", "weekly", timestamps[timestamps.length-1], 'donut2');
-     donut_chart("code/data/donut_by_gender.json", "weekly", timestamps[timestamps.length-1], 'donut3');
+     $(this).text("See cumulative data");
+     $("output").text('WEEK ' + current_week.toString() + ' 2015');
+     donut_chart("code/data/donut_by_ari.json", "weekly", current_week, 'donut1');
+     donut_chart("code/data/donut_by_age.json", "weekly", current_week, 'donut2');
+     donut_chart("code/data/donut_by_gender.json", "weekly", current_week, 'donut3');
 
-     dis_alert_list(timestamps[timestamps.length-1]);
+     dis_alert_list(current_week);
 
      if ($("select.choice_disease").val() == "1") {
         map.removeLayer(markers);
@@ -1278,54 +1231,8 @@ else {
         show_weekly('code/data/Oth_per_week.geojson');;
     }    
 };
+
 });
-return buttonswitchCW;
-       };
-switchCW.addTo(map);
-
-var sh_legend = L.control( { position: 'topright' } );
-sh_legend.onAdd = function(map) {
-var buttonLegend = L.DomUtil.create("button", "btlegend btn btn-default");
-$(buttonLegend).append( '<span class="glyphicon glyphicon glyphicon-list-alt" aria-hidden="true"></span>');
-
-  L.DomEvent.addListener(buttonLegend, 'click', function(e) { 
-    if ($("div.legend").is(":visible")) {
-        $("div.legend").hide();
-    }
-    else{
-        $("div.legend").show();
-    };
-      
-  });
-  return buttonLegend;
-};
-sh_legend.addTo(map); 
-
-var switchOsm = L.control( { position: 'topright' } );
-switchOsm.onAdd = function(map) {
-var buttonSwitch = L.DomUtil.create("button", "bswitch btn btn-default");
-//$(buttonSwitch).text("OpenStreetMap");
-$(buttonSwitch).append( '<span class=" glyphicon glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>');
-  L.DomEvent.addListener(buttonSwitch, 'click', function(e) { 
-
-    if (map.hasLayer(OpenStreetMap_HOT) == true) {
-        map.removeLayer(OpenStreetMap_HOT);
-        map.addLayer(baseLayers);
-        
-        hprovs.bringToBack();
-        hdists.bringToBack();
-        countries.bringToBack();            
-        $("em").show();
-    }
-    else{
-        map.addLayer(OpenStreetMap_HOT);
-        $("em").hide();
-        map.removeLayer(baseLayers);
-    };
-  });
-  return buttonSwitch;
-};
-switchOsm.addTo(map); 
 
  // code for main chart
  d3.json("code/data/linebart_chart.json",function(error,data) {
@@ -1444,33 +1351,31 @@ $("select#trends").change(
 $('input.range-slider').attr('data-step', '1');
 $('input.range-slider').attr('data-intro', "The timeline allows you to consult the data of particular week.<br />Moving the cursor will update the data on the map and also the pie charts on left side and the lists on the right side.");
 
-$('button.bswitchCW').attr('data-step', '2');
+$('output.temporal-legend').attr('data-step', '2');
+$('output.temporal-legend').attr('data-intro', 'By moving the cursor of the timeline, the week number gets updated here.');
+
+$('button.bswitchCW').attr('data-step', '3');
 $('button.bswitchCW').attr('data-intro', 'Click on this button to consult the cumulative data.<br />To go back to the weekly data, click again.');
 
-$('select.choice_disease').attr('data-step', '3');
+$('select.choice_disease').attr('data-step', '4');
 $('select.choice_disease').attr('data-intro', 'With this dropdown menu you can select a particular disease. By doing so, the data on the map will be update. By default, all the diseases are displayed');
 
-$("button.bswitch").attr('data-step', '4');
+$("button.bswitch").attr('data-step', '5');
 $("button.bswitch").attr('data-intro', 'Switch to OpenStreetMap');
 
-$("button.btlegend").attr('data-step', '5');
+$("button.btlegend").attr('data-step', '6');
 $("button.btlegend").attr('data-intro', 'Show or hide the legend');
 
-$("button.bzoom").attr('data-step', '6');
+$("button.bzoom").attr('data-step', '7');
 $("button.bzoom").attr('data-intro', 'Full Extent');
 
-$("select#trends").attr('data-step', '7');
+$("select#trends").attr('data-step', '8');
 $("select#trends").attr('data-intro', "You can select a particular variable. It will update the chart below");
-
-// close ready(function()
 });
 </script> 
 
-    
-        <script src="code/src/bootstrap-3.3.4-dist/js/bootstrap.min.js"></script> 
-    
-
-     
+<script src="code/src/bootstrap-3.3.4-dist/js/bootstrap.min.js"></script> 
+  
 <script>  
     $(function () 
     { $(".btlegend").tooltip({placement : 'bottom', title: 'Show / Hide Legend', container: 'body'});  
@@ -1485,5 +1390,14 @@ $("select#trends").attr('data-intro', "You can select a particular variable. It 
     }); 
 </script>
 
+  </body>
+</html>
+
+    
+        <script src="code/src/bootstrap-3.3.4-dist/js/bootstrap.min.js"></script> 
+    
+
+     
+    
   </body>
 </html>
