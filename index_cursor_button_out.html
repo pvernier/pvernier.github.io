@@ -1158,7 +1158,7 @@ if ($(this).text() == "See cumulative data") {
 // To go back to the weekly data
 else {
      $(this).text("See cumulative data");
-     //$("output").text('WEEK ' + timestamps[timestamps.length-1].toString() + ' 2015');
+     $("output").text('WEEK ' + timestamps[timestamps.length-1].toString() + ' 2015');
      donut_chart("code/data/donut_by_ari.json", "weekly", timestamps[timestamps.length-1], 'donut1');
      donut_chart("code/data/donut_by_age.json", "weekly", timestamps[timestamps.length-1], 'donut2');
      donut_chart("code/data/donut_by_gender.json", "weekly", timestamps[timestamps.length-1], 'donut3');
