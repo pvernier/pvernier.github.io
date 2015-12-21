@@ -6,10 +6,17 @@ body {
 div.container {
     box-sizing: content-box;
 }
+a.navbar-brand{
+    width:300px;
+    padding: 0;
+}
 .navbar-brand > img {
     display: inline;
 }
+img#who_logo {
+    float: right;
 
+}
 /*Juste pour dasboard_2*/
 .chart-popup {
     width: 520px;
@@ -267,7 +274,7 @@ select#trends {
     border: 1px solid black;
 }*/
 
-/*Page  Case Definition*/
+/*Page  Case Definition */
 
 td.cd_cat {
     text-align: center;
@@ -281,4 +288,13 @@ td:first-child {
 
 a#dlcd_pdf {
     float: right;    
+}
+/*Page  Partners */
+table#partners td {
+    text-align: center; 
+    vertical-align: middle;
+}
+
+table#partners img {
+    width: 120px;
 }
