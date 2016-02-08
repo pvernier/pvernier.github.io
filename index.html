@@ -748,7 +748,7 @@ function dis_alert_list(week) {
 }
 function createSliderUI(data) {
     $("input.range-slider").show();
-    $('input').on('input change', function() {
+    $('input').on('input', function() {
         current_week = $(this).val();
         map.removeLayer(markers);
         updatePropSymbols(data, current_week .toString());
