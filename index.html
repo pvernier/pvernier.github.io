@@ -748,7 +748,8 @@ function dis_alert_list(week) {
 }
 function createSliderUI(data) {
     $("input.range-slider").show();
-    $('input').on('change', function() {
+    if (L.Browser.ie) {
+     $('input').on('change', function() {
         current_week = $(this).val();
         map.removeLayer(markers);
         updatePropSymbols(data, current_week .toString());
@@ -758,7 +759,23 @@ function createSliderUI(data) {
         
         dis_alert_list(current_week);
         $("output").text('WEEK ' + current_week.toString() + ' 2015');
-    });
+     });
+    }
+    else {
+     $('input').on('input', function() {
+        current_week = $(this).val();
+        map.removeLayer(markers);
+        updatePropSymbols(data, current_week .toString());
+        donut_chart("code/data/donut_by_ari.json", "weekly", current_week , 'donut1');
+        donut_chart("code/data/donut_by_age.json", "weekly", current_week , 'donut2');
+        donut_chart("code/data/donut_by_gender.json", "weekly", current_week , 'donut3');
+        
+        dis_alert_list(current_week);
+        $("output").text('WEEK ' + current_week.toString() + ' 2015');
+     });
+
+    }
+    
 }
 
 function show_weekly(geojson_file) {
