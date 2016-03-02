@@ -27,7 +27,6 @@
 .chart {
   display: block;
   margin: auto;
-  margin-top: 40px;
 }
 
 text {
@@ -50,7 +49,7 @@ div#buttons_dis div {
 
 div#buttons_dis span {
 	padding: 8px 8px;
-	font-size: 0px;;
+	font-size: 0px;
 	vertical-align: middle;
 	margin: 0 5px 0 10px;
 	border-radius: 50%;
@@ -76,11 +75,16 @@ div#other_dis span {
 	background-color: #9467bd;
 }
 
-p#disease {
-	font-style: italic;
-	white-space: pre
+ul.list-group {
+  display: none;
+  width: 50%;
+  margin: 0 auto;
+  margin-top: 25px;
+  margin-bottom: 25px;
 }
-
+li#disease_name {
+  font-weight: bold;
+}
 
 </style>
   </head>
@@ -112,6 +116,13 @@ p#disease {
         <div class="col-md-2"></div>
         <div class="col-md-8">
         	<h1>Proportion of the different diseases</h1>
+          <div class="alert alert-info" role="alert"><b>Hint</b>: Pass your mouse over a block to display the name of the corresponding disease. By clicking on a block you can also zoom in to its category.</div>
+          <ul class="list-group">
+            <li class="list-group-item" id="disease_name"></li>
+            <li class="list-group-item" id="nb_cons"></li>
+            <li class="list-group-item" id="perc_cat"></li>
+            <li class="list-group-item" id="perc_tot"></li>
+          </ul>
         </div>
         <div class="col-md-2"></div>
     </div>
@@ -131,8 +142,7 @@ p#disease {
     <div class="row">
         <div class="col-md-2"></div>
         <div class="col-md-8">
-        	<p id="disease">      Hint: Pass your mouse over a block to display the name of the corresponding disease</p>
-        	<div id="body">	
+        	<div id="body"></div>
         </div>
         <div class="col-md-2"></div>
     </div>
@@ -165,7 +175,6 @@ var svg = d3.select("#body").append("div")
 
 d3.json("flare_2.json", function(data) {
   node = root = data;
-  console.log(data);
 
   var nodes = treemap.nodes(root)
       .filter(function(d) { return !d.children; });
@@ -176,7 +185,26 @@ d3.json("flare_2.json", function(data) {
       .attr("class", "cell")
       .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
       .on("click", function(d) { return zoom(node == d.parent ? root : d.parent); })
-      .on("mouseover", function(d) { d3.select("p#disease").text("      " + d.name); });
+      .on("mouseover", function(d) {
+        $("div.alert-info").hide();
+        $("ul.list-group").show();
+        $("#disease_name").css("background-color", color(d.parent.name));
+        d3.select("ul.list-group #disease_name").text(d.name);
+        d3.select("ul.list-group #nb_cons").html('<span class="badge">' + d.size.toLocaleString() + '</span>Number of consultations');
+
+        // For 'Others' it makes no sense to display the % among category
+        if (d.name ==='Others') {
+          $("ul.list-group #perc_cat").hide(); 
+        }
+        else {
+          $("ul.list-group #perc_cat").show(); 
+          d3.select("ul.list-group #perc_cat").html('<span class="badge">' + Math.round(d.size/d.parent.total*1000)/10 + '%' + '</span>Percentage among ' + d.parent.name);
+        }
+
+        d3.select("ul.list-group #perc_tot").html('<span class="badge">' + Math.round(d.size/data.total*1000)/10 + '%' + '</span>Percentage among all consultations');
+        $("span.badge").css("background-color", color(d.parent.name));
+
+      });
 
   cell.append("svg:rect")
       .attr("width", function(d) { return d.dx - 1; })
@@ -213,7 +241,7 @@ function zoom_cat_dis(html_elem, id) {
 	    }
 	    else {
 	      zoom(id.parent);
-	    };
+	    }
    });
   }
 
@@ -228,7 +256,7 @@ function zoom(d) {
 
   t.select("rect")
       .attr("width", function(d) { return kx * d.dx - 1; })
-      .attr("height", function(d) { return ky * d.dy - 1; })
+      .attr("height", function(d) { return ky * d.dy - 1; });
 
   t.select("text")
       .attr("x", function(d) { return kx * d.dx / 2; })
@@ -239,16 +267,7 @@ function zoom(d) {
   d3.event.stopPropagation();
 }
 
-
-
 </script>
-    
-    
-    
-    
-    
-
-
     
      <script src="code/src/bootstrap-3.3.4-dist/js/bootstrap.min.js"></script> 
     
