@@ -1,0 +1,64 @@
+* {
+    font-family: Century Gothic, sans-serif;
+}
+.flex-container {
+    display: flex;
+    flex-direction: column;
+    margin : 10px;
+}
+div#summary {
+    margin: auto;
+    width: 600px;
+    background: #f1f1f1;
+    font-size: 14px;
+}
+div#summary p {
+    margin: 20px;
+}
+h1, h2 {
+    text-align: center;
+}
+div#profanities, div#deaths {
+    margin: auto;
+    width: 1220px;
+}
+.row {
+    display: grid;
+    grid-template-columns: 40px 1fr 150px;
+    grid-gap: 0px;
+    margin: 5px;
+}
+img {
+    margin: 0;
+}
+p.total {
+    font-size: 12px;
+}
+/*SVG*/  
+.axis text {
+  font: 10px sans-serif;
+}
+.axis line,
+.axis path {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+path {
+    fill: none;
+    stroke: black;
+    stroke-width: .5px;
+}
+.path-line {
+  fill: none;
+  stroke: yellow;
+  stroke-width: 1.5px;
+}
+circle.profanities {
+    fill: #b15928;
+    opacity: .4;
+}
+circle.deaths {
+    fill: red;
+    opacity: .4;
+}
