@@ -1,0 +1,101 @@
+﻿Name,Nationality,Club,Position,Rating,Height,Weight,Preffered_Foot,Age,Ball_Control,Dribbling,Marking,Sliding_Tackle,Standing_Tackle,Aggression,Reactions,Attacking_Position,Vision,Speed,Stamina,Strength,Balance,Agility,Jumping,Heading,Shot_Power,Finishing,Freekick_Accuracy,Penalties
+Cristiano Ronaldo,Portugal,Real Madrid,Withdrawn striker,94,185 cm,80 kg,Right,32,93,92,22,23,31,63,96,94,85,92,92,80,63,90,95,85,92,93,76,85
+Lionel Messi,Argentina,FC Barcelona,Withdrawn striker,93,170 cm,72 kg,Left,29,95,97,13,26,28,48,95,93,90,87,74,59,95,90,68,71,85,95,90,74
+Neymar,Brazil,FC Barcelona,Withdrawn striker,92,174 cm,68 kg,Right,25,95,96,21,33,24,56,88,90,80,90,79,49,82,96,61,62,78,89,84,81
+Luis Suárez,Uruguay,FC Barcelona,Striker,92,182 cm,85 kg,Right,30,91,86,30,38,45,78,93,92,84,77,89,76,60,86,69,77,87,94,84,85
+Manuel Neuer,Germany,FC Bayern,Goal keeper,92,193 cm,92 kg,Right,31,48,30,10,11,10,29,85,12,70,61,44,83,35,52,78,25,25,13,11,47
+De Gea,Spain,Manchester Utd,Goal keeper,90,193 cm,82 kg,Right,26,31,13,13,13,21,38,88,12,68,56,25,64,43,57,67,21,31,13,19,40
+Robert Lewandowski,Poland,FC Bayern,Striker,90,185 cm,79 kg,Right,28,87,85,25,19,42,80,88,89,78,82,79,84,79,78,84,85,86,91,76,81
+Gareth Bale,Wales,Real Madrid,Withdrawn striker,90,183 cm,74 kg,Left,27,88,89,51,52,55,65,87,86,79,95,78,80,65,77,85,86,91,87,85,76
+Zlatan Ibrahimović,Sweden,Manchester Utd,Striker,90,195 cm,95 kg,Right,35,90,87,15,27,41,84,85,86,83,74,75,93,41,86,72,80,93,90,82,91
+Thibaut Courtois,Belgium,Chelsea,Goal keeper,89,199 cm,91 kg,Left,24,23,13,11,16,18,23,81,13,44,52,38,70,45,61,68,13,36,14,11,27
+Jérôme Boateng,Germany,FC Bayern,Defender,89,192 cm,90 kg,Right,28,72,67,90,91,92,82,84,47,76,81,75,91,54,58,75,86,79,34,31,46
+Eden Hazard,Belgium,Chelsea,Withdrawn striker,89,173 cm,74 kg,Right,26,91,93,25,22,27,54,85,85,86,87,77,65,90,92,59,57,79,81,79,86
+Luka Modrić,Croatia,Real Madrid,Midfielder,89,174 cm,65 kg,Right,31,92,86,66,73,80,62,88,79,90,71,83,58,94,93,67,55,73,71,77,80
+Mesut Özil,Germany,Arsenal,Withdrawn striker,89,180 cm,76 kg,Left,28,90,86,22,19,16,48,87,84,93,68,68,56,70,84,52,54,70,75,79,67
+Gonzalo Higuaín,Argentina,Juventus,Striker,89,184 cm,92 kg,Right,29,85,84,12,18,22,50,86,92,70,81,73,85,69,75,77,80,86,92,62,70
+Thiago Silva,Brazil,PSG,Defender,89,183 cm,79 kg,Right,32,80,68,90,89,91,77,84,59,74,76,74,81,68,75,93,82,78,38,73,71
+Sergio Ramos,Spain,Real Madrid,Defender,89,183 cm,75 kg,Right,31,83,61,85,90,89,84,82,52,63,78,84,81,60,80,92,90,79,60,67,68
+Sergio Agüero,Argentina,Manchester City,Striker,89,173 cm,70 kg,Right,28,89,89,13,12,20,57,88,91,83,86,74,73,90,86,80,68,87,90,72,80
+Paul Pogba,France,Manchester Utd,Midfielder,88,191 cm,84 kg,Right,24,90,89,68,76,75,72,86,84,86,79,91,91,61,79,85,73,90,71,82,76
+Antoine Griezmann,France,Atlético Madrid,Striker,88,176 cm,67 kg,Left,26,86,87,23,11,22,69,90,91,76,86,75,61,80,90,87,80,81,88,75,71
+Kevin De Bruyne,Belgium,Manchester City,Midfielder,88,181 cm,68 kg,Right,25,86,85,30,40,39,68,88,84,88,78,85,73,75,78,65,53,85,83,84,77
+Marco Reus,Germany,Bor. Dortmund,Withdrawn striker,88,182 cm,76 kg,Right,27,85,86,30,46,36,49,87,87,86,91,73,67,82,87,72,51,87,84,84,84
+Alexis Sánchez,Chile,Arsenal,Striker,88,169 cm,62 kg,Right,28,86,89,30,35,39,80,87,86,82,84,85,72,87,90,85,70,84,85,78,77
+Toni Kroos,Germany,Real Madrid,Midfielder,88,182 cm,78 kg,Right,27,85,78,63,65,75,60,85,76,88,37,78,74,62,70,34,54,87,75,84,73
+Diego Godín,Uruguay,Atlético Madrid,Defender,88,185 cm,73 kg,Right,31,76,53,87,89,86,86,85,48,52,67,69,80,58,63,89,92,67,42,51,50
+Mats Hummels,Germany,FC Bayern,Defender,88,191 cm,92 kg,Right,28,77,68,85,87,92,66,85,56,79,65,66,85,58,64,68,90,71,55,53,68
+Hugo Lloris,France,Spurs,Goal keeper,88,188 cm,82 kg,Left,30,34,10,12,18,10,31,84,10,30,63,41,43,54,55,74,10,23,10,10,40
+Giorgio Chiellini,Italy,Juventus,Defender,88,187 cm,84 kg,Left,32,55,56,92,90,92,90,78,28,50,79,69,91,65,59,89,80,78,33,31,50
+Philipp Lahm,Germany,FC Bayern,Defender,88,170 cm,66 kg,Right,33,86,82,86,95,87,58,91,69,82,67,79,59,93,82,72,63,57,47,59,69
+Pepe,Portugal,Real Madrid,Defender,88,188 cm,81 kg,Right,34,62,58,88,89,87,94,84,40,48,75,64,84,49,63,76,82,63,46,47,57
+Petr Čech,Czech Republic,Arsenal,Goal keeper,88,196 cm,90 kg,Left,34,22,12,11,12,13,17,86,13,53,50,32,65,34,49,51,19,21,12,19,23
+Gianluigi Buffon,Italy,Juventus,Goal keeper,88,192 cm,91 kg,Right,39,28,26,10,11,11,38,80,12,50,43,39,69,49,55,75,13,39,15,13,22
+Iniesta,Spain,FC Barcelona,Midfielder,88,171 cm,68 kg,Right,32,93,90,57,56,57,58,88,85,94,73,64,59,86,82,54,54,65,73,70,71
+Jan Oblak,Slovenia,Atlético Madrid,Goal keeper,87,189 cm,87 kg,Right,24,16,12,14,18,12,34,84,11,55,60,41,78,49,67,76,15,22,11,14,11
+James Rodríguez,Colombia,Real Madrid,Withdrawn striker,87,180 cm,75 kg,Left,25,85,84,25,30,42,65,84,80,86,75,68,70,73,82,54,62,86,82,86,81
+Pierre-Emerick Aubameyang,Gabon,Bor. Dortmund,Striker,87,187 cm,80 kg,Right,27,82,82,28,36,25,45,87,89,77,96,79,77,69,80,77,79,81,88,74,82
+Leonardo Bonucci,Italy,Juventus,Defender,87,190 cm,85 kg,Right,29,75,68,84,88,88,82,84,38,74,75,73,85,55,61,85,84,74,37,61,70
+Arturo Vidal,Chile,FC Bayern,Midfielder,87,180 cm,75 kg,Right,29,83,76,76,84,89,91,89,80,80,74,93,79,77,75,82,81,84,77,68,84
+Ivan Rakitić,Croatia,FC Barcelona,Withdrawn striker,87,184 cm,78 kg,Right,29,87,84,52,53,65,67,79,80,87,65,76,63,66,71,51,58,84,83,84,78
+David Silva,Spain,Manchester City,Midfielder,87,173 cm,67 kg,Left,31,90,85,23,29,42,51,84,81,92,65,68,56,88,92,66,54,71,70,77,77
+Samir Handanovič,Slovenia,Inter,Goal keeper,87,193 cm,89 kg,Right,32,24,18,17,13,10,25,83,12,41,57,41,71,36,42,78,10,22,10,14,23
+Piqué,Spain,FC Barcelona,Defender,87,193 cm,85 kg,Right,30,78,59,86,86,87,72,84,58,62,73,69,83,44,58,74,83,62,64,43,69
+Arjen Robben,Netherlands,FC Bayern,Midfielder,87,180 cm,80 kg,Left,33,89,91,29,26,26,47,87,85,83,86,68,65,91,89,61,51,86,84,83,80
+Paulo Dybala,Argentina,Juventus,Withdrawn striker,86,177 cm,74 kg,Left,23,91,91,14,20,20,48,85,85,82,86,81,65,85,91,75,68,82,88,82,84
+Marco Verratti,Italy,PSG,Midfielder,86,165 cm,60 kg,Right,24,87,88,76,79,82,89,87,71,86,64,77,56,94,87,64,55,66,52,64,64
+David Alaba,Austria,FC Bayern,Defender,86,180 cm,76 kg,Left,24,83,79,81,83,83,69,84,77,78,86,87,69,77,82,82,75,83,63,83,80
+Henrikh Mkhitaryan,Armenia,Manchester Utd,Withdrawn striker,86,177 cm,75 kg,Right,28,89,87,49,55,53,69,83,83,85,84,85,63,83,88,72,53,87,77,64,72
+Bernd Leno,Germany,Bayer 04,Goal keeper,86,190 cm,83 kg,Right,25,22,16,8,18,15,28,81,7,53,52,43,68,44,52,73,13,23,9,8,23
+Thomas Müller,Germany,FC Bayern,Withdrawn striker,86,186 cm,75 kg,Right,27,82,75,31,44,41,57,92,93,81,79,90,67,72,77,81,82,77,87,59,60
+Sergio Busquets,Spain,FC Barcelona,Midfielder,86,189 cm,76 kg,Right,28,80,74,81,80,85,85,82,77,84,33,88,77,55,58,66,68,61,60,68,60
+Thiago,Spain,FC Bayern,Midfielder,86,174 cm,70 kg,Right,25,91,90,49,62,64,57,84,83,85,68,74,59,85,90,75,58,75,69,77,75
+Jordi Alba,Spain,FC Barcelona,Defender,86,170 cm,68 kg,Left,28,84,80,81,83,84,75,82,77,68,93,90,66,86,90,81,63,64,73,64,59
+Coutinho,Brazil,Liverpool,Withdrawn striker,86,171 cm,68 kg,Right,24,88,88,24,40,44,55,81,83,87,77,79,61,91,91,59,47,79,73,79,64
+Ángel Di María,Argentina,PSG,Withdrawn striker,86,180 cm,75 kg,Left,29,87,87,37,56,59,76,80,82,85,86,78,64,79,90,72,53,87,74,72,73
+Diego Costa,Spain,Chelsea,Striker,86,188 cm,85 kg,Right,28,83,79,28,34,39,93,85,88,74,78,85,91,52,58,64,82,84,89,59,76
+Edinson Cavani,Uruguay,PSG,Striker,86,184 cm,71 kg,Right,30,80,80,24,27,45,82,85,89,77,79,90,74,59,82,88,88,85,85,74,84
+Radja Nainggolan,Belgium,Roma,Midfielder,86,176 cm,65 kg,Right,28,85,80,78,88,85,88,87,88,76,78,94,78,84,81,76,59,84,76,68,63
+Marcelo,Brazil,Real Madrid,Defender,86,174 cm,75 kg,Left,28,87,83,80,87,84,84,85,75,75,80,82,77,82,77,77,70,83,67,67,59
+Claudio Marchisio,Italy,Juventus,Midfielder,86,180 cm,75 kg,Right,31,85,84,72,78,78,78,86,82,84,79,83,71,79,81,67,68,82,65,78,78
+Miranda,Brazil,Inter,Defender,86,186 cm,78 kg,Right,32,67,62,89,89,90,83,82,43,53,76,65,81,58,62,82,84,70,43,39,49
+Karim Benzema,France,Real Madrid,Striker,86,187 cm,79 kg,Right,29,86,82,13,12,15,65,83,87,85,82,74,78,60,77,70,78,83,87,73,82
+Cesc Fàbregas,Spain,Chelsea,Midfielder,86,175 cm,74 kg,Right,29,86,80,60,62,63,45,81,78,91,62,80,64,77,65,68,74,77,76,81,80
+Franck Ribéry,France,FC Bayern,Midfielder,86,170 cm,72 kg,Right,33,90,90,13,26,25,52,86,81,86,79,64,60,91,88,50,41,76,76,81,78
+Santi Cazorla,Spain,Arsenal,Midfielder,86,168 cm,66 kg,Right,32,87,86,58,52,64,64,85,82,85,65,72,59,91,85,70,58,78,77,78,80
+Andrea Barzagli,Italy,Juventus,Defender,86,187 cm,88 kg,Right,35,65,60,90,90,90,74,82,28,58,79,69,87,65,59,85,76,54,27,31,60
+Harry Kane,England,Spurs,Striker,85,188 cm,86 kg,Right,23,82,77,41,38,36,74,85,86,72,77,84,84,62,74,70,83,86,88,66,82
+Alexandre Lacazette,France,Olym. Lyonnais,Striker,85,175 cm,73 kg,Right,25,84,85,23,30,42,70,85,87,77,87,80,79,84,87,78,76,81,87,78,84
+Keylor Navas,Costa Rica,Real Madrid,Goal keeper,85,185 cm,78 kg,Right,30,19,16,12,14,14,32,82,16,54,53,39,75,61,60,74,11,21,15,15,25
+Romelu Lukaku,Belgium,Everton,Striker,85,190 cm,94 kg,Left,23,79,76,27,30,30,72,77,85,70,89,80,93,48,62,71,83,88,87,66,80
+Christian Eriksen,Denmark,Spurs,Withdrawn striker,85,180 cm,76 kg,Right,25,86,84,38,22,56,44,82,81,88,74,88,52,81,77,57,52,78,75,87,67
+İlkay Gündoğan,Germany,Manchester City,Midfielder,85,180 cm,80 kg,Right,26,88,87,57,64,64,68,87,77,87,74,73,74,83,85,62,49,77,69,74,76
+Toby Alderweireld,Belgium,Spurs,Defender,85,187 cm,91 kg,Right,28,70,61,86,83,88,79,84,56,64,69,75,81,49,60,83,83,86,45,69,60
+Willian,Brazil,Chelsea,Withdrawn striker,85,175 cm,75 kg,Right,28,86,87,43,51,62,44,81,78,83,86,86,61,82,87,46,29,71,75,85,60
+Miralem Pjanić,Bosnia Herzegovina,Juventus,Midfielder,85,180 cm,72 kg,Right,26,89,86,60,64,64,62,84,76,88,75,79,65,79,79,61,60,79,70,91,79
+Juan Mata,Spain,Manchester Utd,Withdrawn striker,85,170 cm,63 kg,Left,28,88,83,25,21,28,52,85,84,87,63,74,43,89,89,72,63,75,80,84,81
+Javi Martinez,Spain,FC Bayern,Defender,85,190 cm,81 kg,Right,28,71,62,82,87,86,87,83,57,74,53,62,84,58,54,77,86,76,55,45,52
+Dimitri Payet,France,Olym. Marseille,Withdrawn striker,85,175 cm,77 kg,Right,30,90,89,29,39,36,57,76,79,87,75,73,76,81,80,48,59,78,76,91,76
+Dries Mertens,Belgium,Napoli,Striker,85,169 cm,61 kg,Right,29,88,88,30,40,40,59,80,81,81,87,76,42,92,94,60,35,80,77,77,78
+Sokratis,Greece,Bor. Dortmund,Defender,85,186 cm,85 kg,Right,28,58,58,87,86,89,90,81,50,52,83,74,86,67,63,84,84,79,44,35,38
+Marek Hamšik,Slovakia,Napoli,Midfielder,85,183 cm,79 kg,Right,29,86,83,60,62,71,56,86,84,86,77,83,69,63,76,72,74,79,78,72,70
+Blaise Matuidi,France,PSG,Midfielder,85,175 cm,70 kg,Left,29,77,73,83,81,85,85,84,68,75,79,94,78,79,77,83,73,74,65,52,56
+Stéphane Ruffier,France,AS Saint-Étienne,Goal keeper,85,188 cm,93 kg,Right,30,15,12,11,11,12,31,77,12,49,50,37,76,55,51,72,12,21,11,12,25
+Laurent Koscielny,France,Arsenal,Defender,85,186 cm,75 kg,Right,31,67,62,83,86,87,90,82,31,56,80,77,76,62,70,86,84,54,32,49,51
+Filipe Luís,Brazil,Atlético Madrid,Defender,85,182 cm,77 kg,Left,31,81,77,85,86,83,81,83,71,70,83,91,74,60,74,62,68,71,59,75,65
+Vincent Kompany,Belgium,Manchester City,Defender,85,193 cm,85 kg,Right,30,66,63,85,86,88,81,83,41,59,69,68,87,42,60,73,84,75,45,52,63
+Aymeric Laporte,France,Athletic Bilbao,Defender,84,189 cm,85 kg,Left,22,71,55,86,85,88,72,82,54,52,71,73,84,55,49,77,85,70,45,77,35
+Yannick Carrasco,Belgium,Atlético Madrid,Midfielder,84,180 cm,66 kg,Right,23,85,90,19,26,39,61,83,82,74,89,74,59,71,91,68,53,84,78,78,74
+Carvajal,Spain,Real Madrid,Defender,84,173 cm,73 kg,Right,25,83,76,85,86,85,81,81,61,57,85,84,75,79,82,76,65,64,41,47,45
+Riyad Mahrez,Algeria,Leicester City,Midfielder,84,179 cm,62 kg,Left,26,90,88,25,21,27,40,75,80,79,79,77,57,82,92,59,45,76,77,75,72
+Raphaël Varane,France,Real Madrid,Defender,84,191 cm,78 kg,Right,23,75,57,84,85,86,73,79,44,56,83,70,84,47,58,79,83,52,40,54,43
+Mauro Icardi,Argentina,Inter,Striker,84,181 cm,75 kg,Right,24,79,75,17,21,21,35,83,89,64,80,72,76,76,75,90,84,81,89,45,78
+Lorenzo Insigne,Italy,Napoli,Withdrawn striker,84,163 cm,59 kg,Right,25,90,88,16,22,24,34,80,83,85,86,77,44,93,96,55,56,68,71,75,61
+Isco,Spain,Real Madrid,Withdrawn striker,84,176 cm,74 kg,Right,24,90,89,25,49,66,58,78,83,84,69,71,59,82,83,64,55,72,79,74,76
+Koke,Spain,Atlético Madrid,Midfielder,84,178 cm,74 kg,Right,25,86,80,63,51,66,71,84,80,89,69,82,75,78,77,61,61,84,71,76,59
+Kostas Manolas,Greece,Roma,Defender,84,189 cm,83 kg,Right,25,65,54,88,87,86,86,81,25,22,80,79,84,60,69,86,80,43,10,10,26
+Danijel Subašić,Croatia,AS Monaco,Goal keeper,84,191 cm,84 kg,Right,32,19,11,15,13,14,31,79,15,52,54,32,80,37,42,75,13,24,10,66,23
+Nicolás Otamendi,Argentina,Manchester City,Defender,84,183 cm,81 kg,Right,29,64,41,81,83,84,89,78,49,45,75,78,81,62,71,90,85,69,53,39,44
+Shkodran Mustafi,Germany,Arsenal,Defender,84,184 cm,82 kg,Right,24,70,53,82,85,83,79,81,50,55,73,74,81,69,66,85,81,66,58,47,54
+Nemanja Matić,Serbia,Chelsea,Midfielder,84,194 cm,84 kg,Left,28,79,72,76,77,83,83,82,68,77,68,90,90,53,57,71,77,78,64,67,69
+Alex Sandro,Brazil,Juventus,Defender,84,181 cm,76 kg,Left,26,81,82,76,82,82,70,80,72,70,89,93,79,79,79,79,72,78,57,59,59

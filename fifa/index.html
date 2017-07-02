@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>The 100 best players in EA Sports Fifa 17</title>
+    <link rel="stylesheet" type="text/css" href="resources/style.css">
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-101667835-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+</head>
+<body>
+  <div id="container" class="flex-container">
+    <h1>The 100 best players in EA Sports Fifa 17</h1>
+    <div id="summary">
+        <p>Raw data available <a href="https://github.com/SoumitraAgarwal/Webscraping-Fifa-Ratings">here</a> or <a href="https://www.kaggle.com/artimous/complete-fifa-2017-player-dataset-global">here</a>. Made with D3. Source code available <a href="https://github.com/pvernier/pvernier.github.io/tree/master/fifa">here</a>.</p>
+        <p>Select the variable to display and the one to classify the player by choosing in the drop down menus. Mouse over a circle to get information about the corresponding player.
+        Click on it to hightlight the members of his class.</p>
+    </div>
+    <div id="space"></div>
+    <div id=content>
+      <div id="info" class="grid-container">
+        <img src="">
+        <div id="metadata_player">
+          <h4 id="player_name"></h4>
+          <p class="info_player" id ="position"></p>
+          <p class="info_player" id ="club"></p>
+          <p class="info_player" id ="nationality"></p>
+          <h5 class="info_player" id ="variable"></h5>
+        </div>
+        <div id="metadata_player2">
+          <p class="info_player" id ="age"></p>
+          <p class="info_player" id ="weight"></p>
+          <p class="info_player" id ="height"></p>
+        </div>
+        <div>
+          <span class="menu">Show</span>
+          <select id="variables">
+            <option value="Rating">Rating</option>
+            <option value="Ball_Control">Ball Control</option>
+            <option value="Dribbling">Dribbling</option>
+            <option value="Marking">Marking</option>
+            <option value="Sliding_Tackle">Sliding Tackle</option>
+            <option value="Standing_Tackle">Standing Tackle</option>
+            <option value="Aggression">Aggression</option>
+            <option value="Reactions">Reactions</option>
+            <option value="Attacking_Position">Attacking Position</option>
+            <option value="Vision">Vision</option>
+            <option value="Speed">Speed</option>
+            <option value="Stamina">Stamina</option>
+            <option value="Strength">Strength</option>
+            <option value="Balance">Balance</option>
+            <option value="Agility">Agility</option>
+            <option value="Jumping">Jumping</option>
+            <option value="Heading">Heading</option>
+            <option value="Shot_Power">Shot Power</option>
+            <option value="Finishing">Finishing</option>
+            <option value="Freekick_Accuracy">Freekick Accuracy</option>
+            <option value="Penalties">Penalties</option>
+          </select> 
+        </div>
+        <div>
+          <span class="menu">Classify players by</span>
+          <select id="classify">
+            <option value="None">None</option>
+            <option value="Position">Position</option>
+            <option value="Nationality">Nationality</option>
+            <option value="Club">Club</option>
+          </select>
+        </div>
+      </div> 
+      <div id="chart"></div> 
+    </div>
+  </div>   
+</body>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="resources/main.js"></script>
+</html>
