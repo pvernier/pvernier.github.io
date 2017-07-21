@@ -1,6 +1,6 @@
 # America's Cup 2013 Finale: An animated map
 
-## Original idea by the New York Times ([dataviz](http://www.nytimes.com/interactive/2013/09/25/sports/americas-cup-course.html)).
+### Original idea by the New York Times ([dataviz](http://www.nytimes.com/interactive/2013/09/25/sports/americas-cup-course.html)).
 
 Original data accessible [here](https://drive.google.com/file/d/0B2CUun8QUAMsUDJydWw2YTBzMUE/edit).
 
