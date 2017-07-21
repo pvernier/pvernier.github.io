@@ -1,5 +1,7 @@
 # America's Cup 2013 Finale: An animated map
 
+## Original idea by the **New York Times** ([dataviz](http://www.nytimes.com/interactive/2013/09/25/sports/americas-cup-course.html)).
+
 Original data accessible [here](https://drive.google.com/file/d/0B2CUun8QUAMsUDJydWw2YTBzMUE/edit).
 
 The file AC.zip (101 Mo) contains all the data of the 2013 competition. I only used the data of finale between New Zealand and USA (file 130925.zip).
@@ -18,11 +20,11 @@ I save the 2 files under:
 * us.csv
 * nz.csv
 
-They are accesible [here](https://github.com/pvernier/pvernier.github.io/tree/master/americas_cup/data)
+They are accesible [here](https://github.com/pvernier/pvernier.github.io/tree/master/americas_cup/data).
 
 I manually removed a few lines that were not in both files to have exactly the same (number of) lines in both files. 
 
-I transformed the data with PostgreSQL/PostGIS (versions 9.3 y 2.1.1). The SQL query is accessible [here](https://github.com/pvernier/pvernier.github.io/blob/master/americas_cup/data/queries_americas_cup.sql). I am just keeping data every 3 seconds. The results are 2 spatial tables "boat_us" and "boat_nz". They both contain the same 3 columns:
+I transformed the data with PostgreSQL/PostGIS (versions 9.3 y 2.1.1). The SQL query is accessible [here](https://github.com/pvernier/pvernier.github.io/blob/master/americas_cup/data/queries_americas_cup.sql). I am just keeping data every 3 seconds. The results are 2 spatial tables "boat_us" and "boat_nz". They both contain the 3 same columns:
 * time: time in seconds since the beginning of the race (warm up included)
 * run: percentage of the race done (0% during warm up)
 * geog: coordinates of the current location
@@ -33,5 +35,6 @@ The table "boat_us" contains 2 more columns:
 
 I only included them in 1 table as I consider them as the same for both boats.
 
-Then with QGIS, I converted the 2 tables as GeoJSON files. Theya re available [here](https://github.com/pvernier/pvernier.github.io/tree/master/americas_cup/resources/layers) (with the floats layer).
+Then with QGIS, I converted the 2 tables as GeoJSON files. They are available [here](https://github.com/pvernier/pvernier.github.io/tree/master/americas_cup/resources/layers) (with the floats layer).
 
+The animated map is done with Leaflet. The code is available [here](https://github.com/pvernier/pvernier.github.io/blob/master/americas_cup/resources/main.js)
