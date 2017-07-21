@@ -1,0 +1,75 @@
+* {
+    font-family: Century Gothic, sans-serif;
+}
+.flex-container {
+    display: flex;
+    flex-direction: column;
+    margin : 10px;
+}
+h1 {
+    text-align: center;
+    display: block;
+    /*font-size: 2em;*/
+    margin-top: 0.67em;
+    margin-bottom: 0.67em;
+    margin-left: 0;
+    margin-right: 0;
+    font-weight: bold;
+}
+div#summary {
+    margin: auto;
+    width: 600px;
+    background: #f1f1f1;
+    font-size: 14px;
+}
+div#summary p {
+    margin: 20px;
+}
+div#space {
+    height: 40px;
+} 
+#map {
+    margin: auto;
+    width: 1150px;
+    height: 450px;
+}
+.wind {
+    background: #d9d9d9;
+    line-height: 4px;
+    font-size: 10px;
+    border-radius: 50%;
+    padding: 4px 4px;
+    width: 60px;
+    height: 60px;
+}
+img#arrow {
+    display: block;
+    margin-left: auto;
+    margin-right: auto
+}
+.info {
+    line-height: 4px;
+    color: #555;
+    background: white;
+    border-radius: 5px;
+    padding: 8px 8px;
+    width: 100px;
+}
+div#us {
+    background: #d7301f;
+    height: 4px;
+    width: 0px;
+}
+div#nz {
+    background: #0570b0;
+    height: 4px;
+    width: 0px;
+}
+.leaflet-tooltip {
+    background: none;
+    border: none;
+    box-shadow: none;
+}
+.leaflet-tooltip-left:before {
+    border: none;
+}

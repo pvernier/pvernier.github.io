@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>America's Cup 2013 Finale: An animated map</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.1.0/dist/leaflet.css"
+   integrity="sha512-wcw6ts8Anuw10Mzh9Ytw4pylW8+NAD4ch3lqm9lzAsTxg0GFeJgoAtxuCLREZSC5lUXdVyo/7yfsqFjQ4S+aKw=="
+   crossorigin=""/>
+    <link rel="stylesheet" href="resources/style.css"/>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-101667835-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+  </head>
+  <body>
+    <div id="container" class="flex-container">
+      <h1>America's Cup 2013 Finale: An animated map</h1>
+      <div id="summary">
+        <p>Original idea by the <a href="http://www.nytimes.com/interactive/2013/09/25/sports/americas-cup-course.html">New York Times</a>.</p>
+        <p></p>
+        <p>Click on the Play button to start the animation.</p>
+      </div>
+      <div id="space"></div>
+      <div id="map"></div>
+      <div id="space"></div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/leaflet@1.1.0/dist/leaflet.js"
+   integrity="sha512-mNqn2Wg7tSToJhvHcqfzLMU6J4mkOImSPTxVZAdo+lcPlk+GhZmYgACEe0x35K7YzW1zJ7XyJV/TT1MrdXvMcA=="
+   crossorigin=""></script>
+    <script src='resources/layers/boat_us.geojson'></script>
+    <script src='resources/layers/boat_nz.geojson'></script>
+    <script src='resources/layers/floats.geojson'></script>
+    <script src='resources/main.js'></script>
+  </body>
+</html>

@@ -1,0 +1,16 @@
+var floats = {
+"type": "FeatureCollection",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "id": 1 }, "geometry": { "type": "Point", "coordinates": [ -122.45682, 37.82033 ] } },
+{ "type": "Feature", "properties": { "id": 2 }, "geometry": { "type": "Point", "coordinates": [ -122.455, 37.81762 ] } },
+{ "type": "Feature", "properties": { "id": 3 }, "geometry": { "type": "Point", "coordinates": [ -122.45037, 37.81807 ] } },
+{ "type": "Feature", "properties": { "id": 4 }, "geometry": { "type": "Point", "coordinates": [ -122.4625, 37.8128 ] } },
+{ "type": "Feature", "properties": { "id": 5 }, "geometry": { "type": "Point", "coordinates": [ -122.46287, 37.81443 ] } },
+{ "type": "Feature", "properties": { "id": 6 }, "geometry": { "type": "Point", "coordinates": [ -122.45063, 37.81291 ] } },
+{ "type": "Feature", "properties": { "id": 7 }, "geometry": { "type": "Point", "coordinates": [ -122.40079, 37.82382 ] } },
+{ "type": "Feature", "properties": { "id": 8 }, "geometry": { "type": "Point", "coordinates": [ -122.40056, 37.82226 ] } },
+{ "type": "Feature", "properties": { "id": 9 }, "geometry": { "type": "Point", "coordinates": [ -122.40149, 37.81023 ] } },
+{ "type": "Feature", "properties": { "id": 10 }, "geometry": { "type": "Point", "coordinates": [ -122.39897, 37.81027 ] } }
+]
+};
