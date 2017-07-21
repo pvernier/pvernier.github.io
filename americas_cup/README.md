@@ -4,7 +4,7 @@
 
 Original data accessible [here](https://drive.google.com/file/d/0B2CUun8QUAMsUDJydWw2YTBzMUE/edit).
 
-The file AC.zip (101 Mo) contains all the data of the 2013 competition. I only used the data of finale between New Zealand and USA (file 130925.zip).
+The file AC.zip (101 Mo) contains all the data of the 2013 competition. I only used the data of the finale between New Zealand and USA (file 130925.zip).
 Once unzip the data are located inside the "csv" folder. I worked with the 2 following files:
 * 20130925130025-NAV-NZL.csv
 * 20130925130025-NAV-USA.csv
