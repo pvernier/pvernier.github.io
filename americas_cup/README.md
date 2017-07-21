@@ -1,6 +1,6 @@
 # America's Cup 2013 Finale: An animated map
 
-## Original idea by the **New York Times** ([dataviz](http://www.nytimes.com/interactive/2013/09/25/sports/americas-cup-course.html)).
+## Original idea by the New York Times ([dataviz](http://www.nytimes.com/interactive/2013/09/25/sports/americas-cup-course.html)).
 
 Original data accessible [here](https://drive.google.com/file/d/0B2CUun8QUAMsUDJydWw2YTBzMUE/edit).
 
@@ -37,4 +37,4 @@ I only included them in 1 table as I consider them as the same for both boats.
 
 Then with QGIS, I converted the 2 tables as GeoJSON files. They are available [here](https://github.com/pvernier/pvernier.github.io/tree/master/americas_cup/resources/layers) (with the floats layer).
 
-The animated map is done with Leaflet. The code is available [here](https://github.com/pvernier/pvernier.github.io/blob/master/americas_cup/resources/main.js)
+The animated map is done with Leaflet. The code is available [here](https://github.com/pvernier/pvernier.github.io/blob/master/americas_cup/resources/main.js).
