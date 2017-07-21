@@ -20,7 +20,7 @@ I save the 2 files under:
 * us.csv
 * nz.csv
 
-They are accesible [here](https://github.com/pvernier/pvernier.github.io/tree/master/americas_cup/data).
+They are accessible [here](https://github.com/pvernier/pvernier.github.io/tree/master/americas_cup/data).
 
 I manually removed a few lines that were not in both files to have exactly the same (number of) lines in both files. 
 
