@@ -1,0 +1,37 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Simple Map Interface</title>
+  <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <v-app>
+      <v-navigation-drawer persistent :mini-variant="miniVariant" :clipped="clipped" clipped-left v-model="drawer" app>
+        <v-toolbar color="grey lighten-2">
+          <v-toolbar-title>Layers</v-toolbar-title>
+          <v-spacer></v-spacer>
+        </v-toolbar>
+        <v-list class="pl-4">
+          <v-checkbox v-bind:label="`Cities`" v-model="layerActive" secondary></v-checkbox>
+        </v-list>
+      </v-navigation-drawer>
+      <v-toolbar fixed app>
+        <v-toolbar-side-icon @click.native.stop="drawer = !drawer"></v-toolbar-side-icon>
+        <v-toolbar-title v-text="title"></v-toolbar-title>
+        <v-spacer></v-spacer>
+      </v-toolbar>
+      <main>
+        <v-content>
+          <v-container fluid>
+            <div id="map" style="height: 96%; width: 100%;"></div>
+          </v-container>
+        </v-content>
+      </main>
+    </v-app>
+  </div>
+  <script src="vendor.js" charset="utf-8"></script>
+  <script src="app.js" charset="utf-8"></script>
+</body>
+</html>
