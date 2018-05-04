@@ -1,0 +1,105 @@
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;  
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+html {
+    box-sizing: border-box;
+    font-size: 62.5%;
+}
+
+body {
+    font-family: 'Rockwell';
+}
+
+#app {
+    height: 100vh;
+    display: grid;
+    grid-template-rows: minmax(6rem, 8%) 1fr minmax(2rem, 3%);
+}
+
+/* HEADER */
+.header {
+    display: grid;
+    grid-template-columns: minmax(4%, 6rem) 1fr minmax(6%, 8rem);
+    align-items: center;
+    background-color: #756bb1; 
+}
+
+.logo {
+    align-self: stretch;
+    background-color: #f1a340;
+    display: grid;
+    justify-content: center;
+    align-content: center;
+}
+
+.title {
+    padding-left: 2rem;
+    font-size: 3rem;
+    color: #f1a340;
+    overflow: hidden;  /* Necessary so that the header doesn't grow */
+}
+
+.user {
+    align-self: center;
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: space-evenly;
+}
+
+/* CONTAINER */
+.container {
+    display: grid;
+    grid-template-columns: minmax(6rem, 4%) 1fr;
+}
+
+/* TOOLBAR */
+.toolbar {
+    padding-bottom: 2rem;
+    background-color: #333;
+    display: grid;
+    grid-template-rows: minmax(14rem, 30%) 1fr;
+    justify-content: center;
+}
+
+.tools {
+    display: grid; 
+    align-content: space-evenly;   
+}
+
+.help {
+    align-self: end;
+}
+
+/* FOOTER */
+.footer {
+    background-color: #756bb1;
+}
+
+/* ICONS */
+img {
+    cursor: pointer;
+}
+
+.icon {
+    width: 2.5rem;
+    height: 2.5rem;
+}
+
+.icons-logo {
+    width: 5rem;
+    height: 5rem;
+}
+
+.icon-toolbar {
+    width: 3.5rem;
+    height: 3.5rem;
+}

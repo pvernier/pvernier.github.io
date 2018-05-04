@@ -1,0 +1,115 @@
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;  
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+html {
+    box-sizing: border-box;
+    font-size: 62.5%;
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    font-family: 'Rockwell';
+}
+
+#app {
+    height: 100%;
+}
+
+/* HEADER */
+.header {
+    display: flex;
+    align-items: center;
+    height: 8%;
+    min-height: 6rem;
+    background-color: #756bb1;
+}
+
+.logo {
+    height: 100%;
+    width: 4%;
+    min-width: 6rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f1a340;
+}
+
+.title {
+    width: 90%;
+    padding-left: 2rem;
+    font-size: 3rem;
+    color: #f1a340;
+}
+
+.user {
+    width: 6%;
+    min-width: 8rem;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+/* CONTAINER */
+.container {
+    display: flex;
+    height: 89%;
+}
+/* TOOLBAR */
+.toolbar {
+    flex: 0 0 4%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items:center;
+    min-width: 6rem;
+    padding-bottom: 2rem;
+    background-color: #333;
+}
+
+.tools {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 30%;
+    min-height: 14rem;
+}
+
+#map {
+    flex: 1;
+}
+
+/* FOOTER */
+.footer {
+    height: 3%;
+    min-height: 2rem;
+    background-color: #756bb1;
+}
+
+/* ICONS */
+img {
+    cursor: pointer;
+}
+
+.icon {
+    width: 2.5rem;
+    height: 2.5rem;
+}
+
+.icons-logo {
+    width: 5rem;
+    height: 5rem;
+}
+
+.icon-toolbar {
+    width: 3.5rem;
+    height: 3.5rem;
+}
