@@ -1,0 +1,64 @@
+body,
+html {
+  margin: 0;
+  padding: 0;
+}
+* {
+  box-sizing: border-box;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+}
+
+.header_item p {
+  margin: 0;
+}
+
+#container {
+  display: grid;
+  grid-template-rows: 5% 35% 60%;
+  width: 100%;
+  height: 100%;
+  font: 12px/20px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+#selection {
+  display: grid;
+  justify-items: center;
+  /* align-items: center; */
+  background-color: #f0f0f0;
+}
+
+#header {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  justify-items: center;
+  margin: 5px;
+}
+
+.select_country {
+  width: 100px;
+}
+
+#map {
+  width: 50%;
+  height: 100%;
+  border: 1px solid #bdbdbd;
+}
+
+#main {
+  margin: 2em;
+}
+
+a.mapboxgl-ctrl-logo {
+  display: none;
+}
+
+.mapboxgl-ctrl-attrib-inner {
+  display: none;
+}
+
+.mapboxgl-ctrl-bottom-right {
+  display: none;
+}

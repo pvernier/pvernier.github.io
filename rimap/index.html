@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>RIMAP country map</title>
+    <meta
+      name="viewport"
+      content="initial-scale=1,maximum-scale=1,user-scalable=no"
+    />
+    <link
+      href="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css"
+      rel="stylesheet"
+    />
+    <link
+      href="main.css"
+      rel="stylesheet"
+    />
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <div id="selection">
+        <div class="header_item">
+          <p>Select a country: <span id="sp_country"></span></p>
+        <select id="select_country">
+          <option value="DZA">Algeria</option>
+          <option value="AFG">Afghanistan</option>
+          <option value="BGD">Bangladesh</option>
+          <option value="BRA">Brazil</option>
+          <option value="CHL">Chile</option>
+          <option value="CHN">China</option>
+          <option value="COD">Democratic Republic of the Congo</option>
+          <option value="DNK">Denmark</option>
+          <option value="DJI">Djibouti</option>
+          <option value="GNQ">Equatorial Guinea</option>
+          <option value="ETH">Ethiopia</option>
+          <option value="FRA">France</option>
+          <option value="HTI">Haiti</option>
+          <option value="IND">India</option>
+          <option value="IDN">Indonesia</option>
+          <option value="LBN">Lebanon</option>
+          <option value="MLI">Mali</option>
+          <option value="NER">Niger</option>
+          <option value="TGO">Togo</option>
+          <option value="GBR">United Kingdom</option>
+          <option value="USA">United States of America</option>
+        </select>
+        </div>
+
+      </div>
+      <div id="header">
+
+          <div id="map"></div>
+
+        <div>
+          <h3>Facts on the country:</h3>
+          <ul>
+            <li>Population Type: XXX</li>
+            <li>Year: YYYY</li>
+            <li>Population: 00000</li>
+          </ul>
+        </div>
+        
+
+        
+      </div>
+      <div id="main">
+        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, 
+          ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.
+          Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi.
+          Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui.
+          Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue,
+          eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
+        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, 
+            ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.
+            Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi.
+            Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui.
+            Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue,
+            eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
+            <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, 
+              ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.
+              Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi.
+              Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui.
+              Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue,
+              eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
+      </div>      
+    </div>
+
+    </div> 
+    
+    <script src="main.js"></script>
+
+
+  </body>
+</html>
