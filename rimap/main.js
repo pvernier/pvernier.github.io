@@ -17,7 +17,7 @@ async function fetch_data(iso) {
 fetch_data(country).then((data) => {
   const extentLong = data.extent.xmax - data.extent.xmin;
   const extentLat = data.extent.ymax - data.extent.ymin;
-  const margin = 0.01;
+  const margin = 0.02;
 
   const Xmax = data.extent.xmax + extentLong * margin;
   const Xmin = data.extent.xmin - extentLong * margin;
