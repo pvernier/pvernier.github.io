@@ -15,12 +15,21 @@ async function fetch_data(iso) {
 
 // call the function asynchronously
 fetch_data(country).then((data) => {
+  const extentLong = data.extent.xmax - data.extent.xmin;
+  const extentLat = data.extent.ymax - data.extent.ymin;
+  const margin = 0.01;
+
+  const Xmax = data.extent.xmax + extentLong * margin;
+  const Xmin = data.extent.xmin - extentLong * margin;
+  const Ymax = data.extent.ymax + extentLat * margin;
+  const Ymin = data.extent.ymin - extentLat * margin;
+
   const map = new mapboxgl.Map({
     container: "map", // container ID
     style: "mapbox://styles/unhcr/ckvl4xy2mj45z15mpkq6w2nv8", // style URL
     bounds: [
-      [data.extent.xmin, data.extent.ymin],
-      [data.extent.xmax, data.extent.ymax],
+      [Xmin, Ymin],
+      [Xmax, Ymax],
     ],
   });
   select_country.addEventListener("change", update_map);
@@ -28,9 +37,17 @@ fetch_data(country).then((data) => {
   function update_map() {
     const val_country = select_country.value;
     fetch_data(val_country).then((data) => {
+      const extentLong = data.extent.xmax - data.extent.xmin;
+      const extentLat = data.extent.ymax - data.extent.ymin;
+      const margin = 0.01;
+
+      const Xmax = data.extent.xmax + extentLong * margin;
+      const Xmin = data.extent.xmin - extentLong * margin;
+      const Ymax = data.extent.ymax + extentLat * margin;
+      const Ymin = data.extent.ymin - extentLat * margin;
       map.fitBounds([
-        [data.extent.xmin, data.extent.ymin],
-        [data.extent.xmax, data.extent.ymax],
+        [Xmin, Ymin],
+        [Xmax, Ymax],
       ]);
     });
   }
