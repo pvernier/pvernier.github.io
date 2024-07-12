@@ -7,7 +7,7 @@ mapboxgl.accessToken =
 
 // async function that fetches the data from the URL
 async function fetch_data(iso) {
-  const url_extent = `https://gis.unhcr.org/arcgis/rest/services/core_v2/wrl_polbnd_int_15m_a_unhcr/FeatureServer/0/query?where=iso3='${iso}'&returnGeometry=true&outSR=4326&returnExtentOnly=true&f=json`;
+  const url_extent = `https://gis.unhcr.org/arcgis/rest/services/core_v2/wrl_polbnd_int_25m_a_unhcr/FeatureServer/0/query?where=iso3='${iso}'&returnGeometry=true&outSR=4326&returnExtentOnly=true&f=json`;
   const response = await fetch(url_extent);
   const data = await response.json();
   return data;
